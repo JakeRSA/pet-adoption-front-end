@@ -1,0 +1,28 @@
+.header {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-logo {
+  margin-left: 10px;
+}
+
+.mini-tools {
+  display: flex;
+  align-items: center;
+  * {
+    margin-right: 5px;
+  }
+}
+
+.mini-login {
+  outline: none;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  &:hover {
+    cursor: pointer;
+  }
+}

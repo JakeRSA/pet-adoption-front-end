@@ -1,0 +1,55 @@
+.height-to-viewport {
+  height: 100vh;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner-container {
+  height: 50%;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  transform: translateY(-25%);
+}
+
+.banner-text {
+  position: absolute;
+  color: white;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.about-text {
+  text-justify: newspaper;
+  width: 80%;
+  height: 5em;
+  padding: 10px;
+  border-bottom: 2px solid black;
+  margin: 4px 0 0 0;
+}
+
+.home-sign-in-button {
+  box-sizing: border-box;
+  outline: none;
+  background: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.2em;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 8px 6px 8px 6px;
+  margin: 20px;
+  width: 280px;
+  &:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+  }
+}

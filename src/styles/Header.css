@@ -1,0 +1,41 @@
+.header {
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.company-logo {
+  margin-left: 10px;
+}
+
+.mini-tools {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mini-tools * {
+  margin-right: 5px;
+}
+
+.mini-login {
+  outline: none;
+  border: none;
+  background: none;
+  text-decoration: underline;
+}
+
+.mini-login:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=Header.css.map */
