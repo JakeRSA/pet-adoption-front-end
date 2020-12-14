@@ -1,7 +1,3 @@
-.height-to-viewport {
-  height: 100vh;
-}
-
 .center {
   display: flex;
   flex-direction: column;
@@ -9,12 +5,12 @@
 }
 
 .banner-container {
-  height: 50%;
+  height: 50vh;
   overflow: hidden;
 }
 
 .banner-image {
-  width: 100%;
+  max-width: 100%;
   transform: translateY(-25%);
 }
 
@@ -29,7 +25,6 @@
 .about-text {
   text-justify: newspaper;
   width: 80%;
-  height: 5em;
   padding: 10px;
   border-bottom: 2px solid black;
   margin: 4px 0 0 0;

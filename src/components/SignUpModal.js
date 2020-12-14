@@ -5,15 +5,37 @@ import closeIcon from "../close.png";
 import { useFormik } from "formik";
 
 function SignUpModal(props) {
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      password: "",
+      passwordConfirm: "",
+    },
+    onSubmit: (values) => {
+      props.isNewUser ? props.onSignUp(values) : props.onSignIn(values);
+    },
+  });
+
   const nameFormFields = (
     <>
       <fieldset>
         <label htmlFor="firstName">First Name</label>
-        <input id="firstName"></input>{" "}
+        <input
+          id="firstName"
+          onChange={formik.handleChange}
+          value={formik.values.firstName}
+        ></input>{" "}
       </fieldset>
       <fieldset>
         <label htmlFor="lastName">Last Name</label>
-        <input id="lastName"></input>{" "}
+        <input
+          id="lastName"
+          onChange={formik.handleChange}
+          value={formik.values.lastName}
+        ></input>{" "}
       </fieldset>
     </>
   );
@@ -32,26 +54,46 @@ function SignUpModal(props) {
       <h1 className="sign-up-header">
         {props.isNewUser ? "JOIN PETCOUTURE.COM" : "SIGN IN TO YOUR ACCOUNT"}
       </h1>
-      <form className="sign-up-form">
+      <form className="sign-up-form" onSubmit={formik.handleSubmit}>
         {props.isNewUser && nameFormFields}
         <fieldset>
           <label htmlFor="email">Email</label>
-          <input id="email" type="email"></input>
+          <input
+            id="email"
+            type="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          ></input>
         </fieldset>
         {props.isNewUser && (
           <fieldset>
             <label htmlFor="phone">Phone number</label>
-            <input id="phone" type="tel"></input>
+            <input
+              id="phone"
+              type="tel"
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+            ></input>
           </fieldset>
         )}
         <fieldset>
           <label htmlFor="password">Password</label>
-          <input id="password" type="password"></input>
+          <input
+            id="password"
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          ></input>
         </fieldset>
         {props.isNewUser && (
           <fieldset>
             <label htmlFor="passwordConfirm">Confirm Password</label>
-            <input id="passwordConfirm" type="password"></input>
+            <input
+              id="passwordConfirm"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.passwordConfirm}
+            ></input>
           </fieldset>
         )}
         <div className="submit-container">

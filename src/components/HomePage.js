@@ -5,11 +5,11 @@ import Header from "./Header";
 import SignUpModal from "./SignUpModal";
 import { useState } from "react";
 
-function HomePage() {
+function HomePage(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isNewUser, setIsNewUser] = useState(true);
 
-  const handleSignUpClick = (formType) => {
+  const handleOpenModal = (formType) => {
     if (formType === "newUser") {
       setIsNewUser(true);
     } else setIsNewUser(false);
@@ -19,16 +19,24 @@ function HomePage() {
   const handleCloseModal = () => {
     setModalIsOpen(false);
   };
+
   return (
-    <div className="center height-to-viewport">
+    <div className="center">
       <SignUpModal
         isOpen={modalIsOpen}
         onCloseModal={handleCloseModal}
         isNewUser={isNewUser}
+        onSignUp={(values) => {
+          props.handleSignUpSubmit(values);
+        }}
+        onSignIn={(values) => {
+          props.handleSignInSubmit(values);
+        }}
       />
       <Header
+        isSignedIn={false}
         onLogInClick={() => {
-          handleSignUpClick("existingUser");
+          handleOpenModal("existingUser");
         }}
       />
       <div className="banner-container">
@@ -48,7 +56,7 @@ function HomePage() {
       <span>
         <button
           onClick={() => {
-            handleSignUpClick("newUser");
+            handleOpenModal("newUser");
           }}
           className="home-sign-in-button"
         >
@@ -56,7 +64,7 @@ function HomePage() {
         </button>
         <button
           onClick={() => {
-            handleSignUpClick("existingUser");
+            handleOpenModal("existingUser");
           }}
           className="home-sign-in-button"
         >

@@ -3,6 +3,18 @@ import "../styles/Header.css";
 import searchImg from "../search.svg";
 
 function Header(props) {
+
+  const signInButton = (
+    <button className="mini-login" onClick={props.onLogInClick}>
+    LOGIN
+  </button>
+  )
+  const logOutButton = (
+  <button className="mini-login" onClick={props.onLogOutClick}>
+    LOG OUT
+  </button>  
+  )
+
   return (
     <div className="header">
       <h1 className="company-logo">PETCOUTURE.COM</h1>
@@ -13,9 +25,7 @@ function Header(props) {
           src={searchImg}
           alt="Search"
         />
-        <button className="mini-login" onClick={props.onLogInClick}>
-          LOGIN
-        </button>
+        {props.isSignedIn ? logOutButton : signInButton}
       </span>
     </div>
   );
