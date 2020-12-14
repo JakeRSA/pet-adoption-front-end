@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Header.css";
 import searchImg from "../search.svg";
 
-function Header() {
+function Header(props) {
   return (
     <div className="header">
       <h1 className="company-logo">PETCOUTURE.COM</h1>
@@ -13,7 +13,9 @@ function Header() {
           src={searchImg}
           alt="Search"
         />
-        <button className="mini-login">LOGIN</button>
+        <button className="mini-login" onClick={props.onLogInClick}>
+          LOGIN
+        </button>
       </span>
     </div>
   );

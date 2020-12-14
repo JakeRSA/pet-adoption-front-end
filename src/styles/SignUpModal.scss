@@ -13,7 +13,19 @@
 }
 
 .sign-up-header {
+  margin: 0;
+  margin-bottom: 20px;
   text-align: center;
+}
+
+.close-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  height: 1.8em;
 }
 
 .sign-up-form {
@@ -38,7 +50,8 @@
   #phone {
     width: 8em;
   }
-  #password, #passwordConfirm {
+  #password,
+  #passwordConfirm {
     width: 12em;
   }
   .submit-container {

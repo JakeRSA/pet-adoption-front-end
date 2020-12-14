@@ -21,7 +21,23 @@
 }
 
 .sign-up-header {
+  margin: 0;
+  margin-bottom: 20px;
   text-align: center;
+}
+
+.close-btn-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.close-btn {
+  height: 1.8em;
 }
 
 .sign-up-form {
@@ -62,7 +78,8 @@
   width: 8em;
 }
 
-.sign-up-form #password, .sign-up-form #passwordConfirm {
+.sign-up-form #password,
+.sign-up-form #passwordConfirm {
   width: 12em;
 }
 

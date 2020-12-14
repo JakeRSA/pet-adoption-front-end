@@ -5,7 +5,6 @@ import SignUpModal from './components/SignUpModal';
 function App() {
   return (
     <div className="App">
-      <SignUpModal />
       <HomePage />
     </div>
   );
