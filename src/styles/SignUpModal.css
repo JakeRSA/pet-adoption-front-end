@@ -1,0 +1,96 @@
+.sign-up-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4px;
+}
+
+.sign-up-header {
+  text-align: center;
+}
+
+.sign-up-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
+}
+
+.sign-up-form fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  border: none;
+}
+
+.sign-up-form label {
+  width: 10em;
+  margin-right: 10px;
+}
+
+.sign-up-form #firstName {
+  width: 8em;
+}
+
+.sign-up-form #email {
+  width: 16em;
+}
+
+.sign-up-form #phone {
+  width: 8em;
+}
+
+.sign-up-form #password, .sign-up-form #passwordConfirm {
+  width: 12em;
+}
+
+.sign-up-form .submit-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.sign-up-form .submit {
+  font-size: 1.1em;
+  font-weight: 500;
+  width: 4em;
+  border: 2px groove black;
+  outline: none;
+  background: none;
+}
+
+.sign-up-form .submit:hover {
+  cursor: pointer;
+}
+
+.sign-up-form .submit:active {
+  font-weight: 600;
+  border: 2px double black;
+  background-color: #fdfdfd;
+}
+/*# sourceMappingURL=SignUpModal.css.map */
