@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
 import { useFormik } from "formik";
+import { useState } from "react";
 
 function SignUpModal(props) {
   const formik = useFormik({
@@ -41,7 +42,13 @@ function SignUpModal(props) {
   );
 
   return (
-    <Modal className="sign-up-modal" isOpen={props.isOpen}>
+    <Modal
+      className="sign-up-modal"
+      isOpen={props.isOpen}
+      onRequestClose={() => {
+        props.onCloseModal();
+      }}
+    >
       <div className="close-btn-container">
         <input
           className="close-btn"

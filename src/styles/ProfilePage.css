@@ -1,0 +1,53 @@
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: space-between;
+      -ms-flex-align: space-between;
+          align-items: space-between;
+}
+
+form fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border: none;
+  margin-bottom: 14px;
+}
+
+form label {
+  width: 8em;
+}
+
+form textarea {
+  width: 600px;
+  height: 130px;
+  resize: none;
+}
+
+form .no-edit-field {
+  border: none;
+}
+
+.do-stuff-btns button {
+  margin: 6px;
+  width: 12em;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 6px;
+  font-weight: 500;
+  outline: none;
+}
+
+.do-stuff-btns button:hover {
+  cursor: pointer;
+}
+
+.do-stuff-btns button:active {
+  border: 1px solid black;
+}
+/*# sourceMappingURL=ProfilePage.css.map */

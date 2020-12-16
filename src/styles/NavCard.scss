@@ -1,0 +1,31 @@
+.nav-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  height: 285px;
+  margin: 20px;
+  &:hover {
+    height: 300px;
+    cursor: pointer;
+  }
+}
+
+.icon-container {
+  height: 80%;
+  border-radius: 6px;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.icon {
+  max-height: 100%;
+}
+
+.card-text {
+  width: fit-content;
+  margin: 0;
+  margin-top: 5px;
+}

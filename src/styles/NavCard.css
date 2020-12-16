@@ -1,0 +1,43 @@
+.nav-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+  border-radius: 6px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 285px;
+  margin: 20px;
+}
+
+.nav-card:hover {
+  height: 300px;
+  cursor: pointer;
+}
+
+.icon-container {
+  height: 80%;
+  border-radius: 6px;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.icon {
+  max-height: 100%;
+}
+
+.card-text {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0;
+  margin-top: 5px;
+}
+/*# sourceMappingURL=NavCard.css.map */
