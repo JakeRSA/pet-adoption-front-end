@@ -1,0 +1,73 @@
+.card {
+  width: 300px;
+  height: 400px;
+  margin: 20px;
+  background-color: black;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 10px 5px grey;
+          box-shadow: 0px 5px 10px 5px grey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.img-container {
+  height: 250px;
+  width: 250px;
+  margin: 20px 20px 5px 20px;
+  border-radius: 4px;
+  border: 2px solid white;
+  overflow: hidden;
+}
+
+.img-container img {
+  max-width: 280px;
+  max-height: 280px;
+}
+
+.basic-info-container {
+  background-color: white;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+  width: 254px;
+}
+
+h2,
+h4,
+p {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 2px solid black;
+}
+
+.submit {
+  background-color: none;
+  color: white;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 5px;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.submit:hover {
+  background-color: #111010;
+}
+/*# sourceMappingURL=PetCard.css.map */

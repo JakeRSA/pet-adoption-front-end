@@ -1,0 +1,57 @@
+.card {
+  width: 300px;
+  height: 400px;
+  margin: 20px;
+  background-color: black;
+  border-radius: 6px;
+  box-shadow: 0px 5px 10px 5px grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.img-container {
+  height: 250px;
+  width: 250px;
+  margin: 20px 20px 5px 20px;
+  border-radius: 4px;
+  border: 2px solid white;
+  overflow: hidden;
+  img {
+    max-width: 280px;
+    max-height: 280px;
+  }
+}
+
+.basic-info-container {
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 10px;
+  width: 254px;
+}
+
+h2,
+h4,
+p {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  border-bottom: 2px solid black;
+}
+
+.submit {
+  background-color: none;
+  color: white;
+  width: fit-content;
+  margin-top: 5px;
+  text-decoration: underline;
+  margin-bottom: 20px;
+  &:hover {
+    background-color: rgb(17, 16, 16);
+  }
+}

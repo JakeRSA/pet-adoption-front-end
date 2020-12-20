@@ -1,0 +1,32 @@
+export const animals = [
+  {
+    animalId: 1,
+    name: "Spot",
+    type: "dog",
+    weight: 12,
+    height: 60,
+    adoptionStatus: "foster",
+    imageUrl: "../my_profile.jpg",
+    carerId: 1,
+  },
+  {
+    animalId: 2,
+    name: "Michelle",
+    type: "bird",
+    weight: 1,
+    height: 15,
+    adoptionStatus: "has owner",
+    imageUrl: "../my_profile.jpg",
+    carerId: 1,
+  },
+  {
+    animalId: 3,
+    name: "Doug",
+    type: "cat",
+    weight: 6,
+    height: 45,
+    adoptionStatus: "has owner",
+    imageUrl: "../my_profile.jpg",
+    carerId: 1,
+  },
+];
