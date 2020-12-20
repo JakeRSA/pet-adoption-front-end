@@ -12,12 +12,6 @@ function WelcomePage(props) {
       <Switch>
         <Route exact path="/">
           <div>
-            <Header
-              isSignedIn={true}
-              onLogOutClick={() => {
-                props.handleLogOut();
-              }}
-            />
             <section className="main-section">
               <h1 className="welcome-msg">{`Welcome, ${props.currentUser.firstName} ${props.currentUser.lastName}`}</h1>
               <div className="search-container">

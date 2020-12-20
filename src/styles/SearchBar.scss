@@ -7,12 +7,12 @@
   &:hover {
     border: 2px solid black;
   }
-  input {
+  .search-term {
     width: 230px;
     border: none;
     outline: none;
   }
-  button {
+ .inline-search-btn {
     border: none;
     border-left: 1px solid grey;
     outline: none;

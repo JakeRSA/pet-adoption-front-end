@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
 html * {
   font-family: "Poppins", sans-serif;
 }
@@ -10,15 +11,12 @@ html * {
   border: 2px groove black;
   outline: none;
   background: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    font-weight: 600;
+    border: 2px double black;
+    background-color: rgb(253, 253, 253);
+  }
 }
-
-.submit:hover {
-  cursor: pointer;
-}
-
-.submit:active {
-  font-weight: 600;
-  border: 2px double black;
-  background-color: #fdfdfd;
-}
-/*# sourceMappingURL=App.css.map */

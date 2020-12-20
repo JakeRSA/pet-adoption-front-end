@@ -10,20 +10,20 @@
   border: 2px solid black;
 }
 
-.search-bar input {
+.search-bar .search-term {
   width: 230px;
   border: none;
   outline: none;
 }
 
-.search-bar button {
+.search-bar .inline-search-btn {
   border: none;
   border-left: 1px solid grey;
   outline: none;
   background: none;
 }
 
-.search-bar button:hover {
+.search-bar .inline-search-btn:hover {
   cursor: pointer;
   font-weight: 500;
 }

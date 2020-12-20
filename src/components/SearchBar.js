@@ -1,11 +1,28 @@
 import React from "react";
+import { useFormik } from "formik";
 import "../styles/SearchBar.css";
 
-function SearchBar() {
+function SearchBar(props) {
+  const formik = useFormik({
+    initialValues: {
+      type: props.type ? props.type : '',
+    },
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
-    <form className="search-bar">
-      <input type="text" placeholder="search by species..."></input>
-      <button type="submit">search</button>
+    <form className="search-bar" onSubmit={formik.handleSubmit}>
+      <input
+        className="search-term"
+        id="type"
+        name="type"
+        type="text"
+        placeholder="search by type..."
+        onChange={formik.handleChange}
+        value={formik.values.type}
+      ></input>
+      <input className="inline-search-btn" type="submit" value="search" />
     </form>
   );
 }

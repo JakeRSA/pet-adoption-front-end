@@ -1,0 +1,75 @@
+.main-section {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.advanced-search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 40%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.advanced-search-form > * {
+  display: block;
+}
+
+.advanced-search-form span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 5px;
+}
+
+.advanced-search-form span * {
+  display: inline;
+}
+
+.advanced-search-form fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.advanced-search-form label {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-right: 8px;
+}
+
+.advanced-search-form .bold {
+  font-weight: 600;
+}
+
+.advanced-search-form .num {
+  width: 3em;
+}
+
+.advanced-search-form p {
+  margin-left: 2px;
+  margin-right: 8px;
+}
+
+.advanced-search-form .submit {
+  margin-top: 1em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+/*# sourceMappingURL=SearchPage.css.map */

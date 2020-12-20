@@ -13,12 +13,6 @@ function ProfilePage(props) {
 
   return (
     <div>
-      <Header
-        isSignedIn={true}
-        onLogOutClick={() => {
-          props.handleLogOut();
-        }}
-      />
       <section className="main-section">
         <h1>My Profile</h1>
         <form>

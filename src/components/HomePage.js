@@ -1,44 +1,17 @@
 import React from "react";
 import "../styles/HomePage.css";
 import banner from "../banner.jpg";
-import Header from "./Header";
-import SignUpModal from "./SignUpModal";
 import { useState } from "react";
 
 function HomePage(props) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [isNewUser, setIsNewUser] = useState(true);
 
-  const handleOpenModal = (formType) => {
-    if (formType === "newUser") {
-      setIsNewUser(true);
-    } else setIsNewUser(false);
-    setModalIsOpen(true);
-  };
+  const onClickOpenModal = (formType) => {
+    props.onOpenModal(formType)
+  }
 
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
 
   return (
     <div className="center">
-      <SignUpModal
-        isOpen={modalIsOpen}
-        onCloseModal={handleCloseModal}
-        isNewUser={isNewUser}
-        onSignUp={(values) => {
-          props.handleSignUpSubmit(values);
-        }}
-        onSignIn={(values) => {
-          props.handleSignInSubmit(values);
-        }}
-      />
-      <Header
-        isSignedIn={false}
-        onLogInClick={() => {
-          handleOpenModal("existingUser");
-        }}
-      />
       <div className="banner-container">
         <img
           className="banner-image"
@@ -56,7 +29,7 @@ function HomePage(props) {
       <span>
         <button
           onClick={() => {
-            handleOpenModal("newUser");
+            onClickOpenModal("newUser");
           }}
           className="home-sign-in-button"
         >
@@ -64,7 +37,7 @@ function HomePage(props) {
         </button>
         <button
           onClick={() => {
-            handleOpenModal("existingUser");
+            onClickOpenModal("existingUser");
           }}
           className="home-sign-in-button"
         >
