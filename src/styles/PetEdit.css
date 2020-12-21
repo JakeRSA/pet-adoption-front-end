@@ -1,0 +1,45 @@
+.add-edit-animal-form span {
+  padding: 0.5em 0 0.5em 0;
+  border-top: 1px solid #5e5e5e;
+}
+
+.add-edit-animal-form #weight,
+.add-edit-animal-form #height {
+  width: 3em;
+  margin-right: 1em;
+}
+
+.add-edit-animal-form label {
+  width: 10em;
+}
+
+.add-edit-animal-form .img-container {
+  margin-left: 0;
+  border-color: black;
+}
+
+.add-edit-animal-form .submit-span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.add-edit-animal-form .submit {
+  color: black;
+  font-weight: 600;
+  background-color: white;
+}
+
+.add-edit-animal-form .submit:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.add-edit-animal-form .submit:active {
+  font-weight: 500;
+}
+/*# sourceMappingURL=PetEdit.css.map */

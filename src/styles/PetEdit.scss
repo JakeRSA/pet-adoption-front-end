@@ -1,0 +1,35 @@
+.add-edit-animal-form {
+  span {
+    padding: 0.5em 0 0.5em 0;
+    border-top: 1px solid rgb(94, 94, 94);
+  }
+  #weight,
+  #height {
+    width: 3em;
+    margin-right: 1em;
+  }
+  label {
+    width: 10em;
+  }
+  .img-container {
+    margin-left: 0;
+    border-color: black;
+  }
+  .submit-span {
+    display: flex;
+    justify-content: center;
+  }
+  .submit {
+    color: black;
+    font-weight: 600;
+    background-color: white;
+    &:hover {
+      cursor: pointer;
+      background-color: black;
+      color: white;
+    }
+    &:active {
+      font-weight: 500;
+    }
+  }
+}

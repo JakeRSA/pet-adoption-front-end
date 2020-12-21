@@ -7,6 +7,7 @@ import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
 import PetCardList from "./components/PetCardList";
 import PetPage from "./components/PetPage";
+import PetEdit from "./components/PetEdit";
 import Modal from "react-modal";
 import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -58,6 +59,25 @@ function App() {
     setCurrentUser(null);
   };
 
+  const animalTypesToOptions = () => {
+    const types = [
+      "dog",
+      "cat",
+      "bird",
+      "rodent",
+      "fish",
+      "reptile",
+      "insect",
+      "other",
+    ];
+    return types.map((type) => (
+      <option key={type} value={type}>
+        {type}
+      </option>
+    ));
+  };
+
+
   return (
     <div className="App">
       <Router>
@@ -83,9 +103,10 @@ function App() {
         />
 
         {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
-        <PetPage />
+        <PetEdit animalTypeOptions={animalTypesToOptions()}/>
 
-        {/* <SearchPage isAdvanced={false} /> */}
+        {/* <SearchPage isAdvanced={false} animalTypeOptions={animalTypesToOptions()}/> */}
+
         {/* <Switch>
           <Route exact path="/">
             {currentUser ? (
