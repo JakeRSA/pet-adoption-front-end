@@ -6,6 +6,7 @@ import WelcomePage from "./components/WelcomePage";
 import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
 import PetCardList from "./components/PetCardList";
+import PetPage from "./components/PetPage";
 import Modal from "react-modal";
 import { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -80,7 +81,10 @@ function App() {
             handleLogOut();
           }}
         />
-        <PetCardList petIds={[1, 2, 3]} header={"My Pets"} />
+
+        {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
+        <PetPage />
+
         {/* <SearchPage isAdvanced={false} /> */}
         {/* <Switch>
           <Route exact path="/">

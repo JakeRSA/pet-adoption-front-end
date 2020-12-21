@@ -1,0 +1,169 @@
+.main-container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+}
+
+.main-details-container {
+  margin-top: 20px;
+  width: 75%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(41, 0, 0, 0.123);
+}
+
+.back-btn {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2px 4px 2px 4px;
+  font-weight: 600;
+  background-color: white;
+  border: 2px solid black;
+  top: 20px;
+  left: 20px;
+}
+
+.back-btn p {
+  margin-left: 2px;
+}
+
+.back-btn:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.back-btn:active {
+  font-weight: 500;
+}
+
+.animal-summary-container {
+  width: 100%;
+  height: 279px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.animal-basic-container {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.pet-details-header {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.pet-details-header h1 {
+  margin: 0;
+}
+
+.img-container {
+  height: 250px;
+  width: 250px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.img-container img {
+  max-height: 255px;
+  max-width: 255px;
+}
+
+.adopt-btn,
+.bookmark-btn {
+  margin-left: 0.5em;
+  margin-right: 5px;
+  background-color: none;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.adopt-btn:hover,
+.bookmark-btn:hover {
+  cursor: pointer;
+  font-weight: 600;
+  background-color: black;
+  color: white;
+}
+
+.adopt-btn:active,
+.bookmark-btn:active {
+  font-weight: 700;
+}
+
+.adopt-btn {
+  border: 2px outset black;
+  padding: 10px 6px 10px 6px;
+}
+
+.bookmark-btn {
+  background: none;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+}
+
+.more-details-container {
+  padding-bottom: 20px;
+  width: 100%;
+}
+
+span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+span h4 {
+  margin-right: 0.5em;
+}
+
+.bio {
+  margin-top: 0.5em;
+}
+
+.detail-row {
+  margin-left: 20px;
+}
+/*# sourceMappingURL=PetPage.css.map */
