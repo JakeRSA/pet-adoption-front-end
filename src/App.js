@@ -144,7 +144,7 @@ function App() {
           }}
         /> */}
 
-        <Switch>
+        {/* <Switch>
           <Route exact path="/">
             {currentUser ? (
               <WelcomePage
@@ -166,14 +166,17 @@ function App() {
                 }}
               />
             )}
-          </Route>
-          {/* <Route path="/profile">
+          </Route> */}
+
+        <ManageUsers />
+
+        {/* <Route path="/profile">
             <ProfilePage currentUser={currentUser} />
           </Route>
           <Route path="/search">
             <SearchPage />
           </Route> */}
-        </Switch>
+        {/* </Switch> */}
       </Router>
     </div>
   );

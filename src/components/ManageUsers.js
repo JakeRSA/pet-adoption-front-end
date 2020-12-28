@@ -23,16 +23,52 @@ function ManageUsers(props) {
       id: 3,
       firstName: "Ekaj",
       lastName: "Namledun",
-      email: "sledunekaj@gmail.com",
+      email: "sledunekajresgaerhaerhareh@gmail.com",
+      phone: "0537915665",
+      type: "member",
+    },
+    {
+      id: 4,
+      firstName: "Dog",
+      lastName: "Boy",
+      email: "dogboy@gmail.com",
+      phone: "0537915665",
+      type: "member",
+    },
+    {
+      id: 5,
+      firstName: "Cat",
+      lastName: "Girl",
+      email: "catgirl@gmail.com",
       phone: "0537915665",
       type: "member",
     },
   ];
 
-  const userList = users.map((user) => <li key={user.id}>{user.firstName}</li>);
+  const userList = users.map((user) => (
+    <li className="item" key={user.id}>
+      <span>
+        <p>{user.firstName + " " + user.lastName}</p>
+        <p>{user.email}</p>
+        <p>{user.phone}</p>
+        <p>{user.type}</p>
+      </span>
+    </li>
+  ));
   return (
-    <div>
-      <ul>{userList}</ul>
+    <div className="main-container">
+      <h1>Manage Users</h1>
+      <ul className="user-list">
+        <li className="list-headers">
+          <span>
+            <p>name</p>
+            <p>email</p>
+            <p>phone</p>
+            <p>type</p>
+          </span>
+        </li>
+        {userList}
+      </ul>
     </div>
   );
 }

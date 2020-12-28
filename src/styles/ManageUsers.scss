@@ -1,3 +1,42 @@
-.main {
-  
+.user-list {
+  width: 100%;
+  padding: 0;
+  li {
+    list-style-type: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    span {
+      display: flex;
+      justify-content: space-between;
+      p {
+        width: 25%;
+      }
+    }
+  }
+
+  .list-headers {
+    font-weight: 600;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    background-color: white;
+  }
+
+  .item {
+    box-sizing: border-box;
+    background-color: #f5f3e9;
+    span p {
+      overflow: hidden;
+    }
+    &:nth-child(odd) {
+      background-color: white;
+    }
+    &:hover {
+      span p {
+        font-weight: 500;
+      }
+      cursor: pointer;
+      background-color: rgb(242, 255, 255);
+      box-shadow: 0 0 8px 2px rgb(217, 246, 255) inset;
+    }
+  }
 }

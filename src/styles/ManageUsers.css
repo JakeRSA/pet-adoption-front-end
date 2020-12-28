@@ -1,1 +1,56 @@
-/* No CSS *//*# sourceMappingURL=ManageUsers.css.map */
+.user-list {
+  width: 100%;
+  padding: 0;
+}
+
+.user-list li {
+  list-style-type: none;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.user-list li span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.user-list li span p {
+  width: 25%;
+}
+
+.user-list .list-headers {
+  font-weight: 600;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: white;
+}
+
+.user-list .item {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #f5f3e9;
+}
+
+.user-list .item span p {
+  overflow: hidden;
+}
+
+.user-list .item:nth-child(odd) {
+  background-color: white;
+}
+
+.user-list .item:hover {
+  cursor: pointer;
+  background-color: #f2ffff;
+  -webkit-box-shadow: 0 0 8px 2px #d9f6ff inset;
+          box-shadow: 0 0 8px 2px #d9f6ff inset;
+}
+
+.user-list .item:hover span p {
+  font-weight: 500;
+}
+/*# sourceMappingURL=ManageUsers.css.map */
