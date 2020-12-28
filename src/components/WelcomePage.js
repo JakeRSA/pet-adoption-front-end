@@ -19,8 +19,18 @@ function WelcomePage(props) {
                 <button className="advanced-btn">advanced search</button>
               </div>
               <div className="nav-cards">
-                <NavCard type={"myPets"} />
-                <NavCard type={"savedPets"} />
+                {props.currentUser.type === "admin" ? (
+                  <>
+                    <NavCard type={"userList"} />
+                    <NavCard type={"animalList"} />
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <NavCard type={"myPets"} />
+                    <NavCard type={"savedPets"} />
+                  </>
+                )}
                 <Link className="visited" to="/profile">
                   <NavCard type={"myProfile"} />
                 </Link>

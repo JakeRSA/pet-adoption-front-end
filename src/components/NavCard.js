@@ -1,5 +1,7 @@
 import React from "react";
 import "../styles/NavCard.css";
+import userListIcon from "../user_list.jpg";
+import animalListIcon from "../animal_list.jpg";
 import myPetsIcon from "../my_pets.jpg";
 import savedPetsIcon from "../saved_pets.jpg";
 import myProfileIcon from "../my_profile.jpg";
@@ -8,6 +10,14 @@ function NavCard(props) {
   let icon;
   let text = "";
   switch (props.type) {
+    case "userList":
+      icon = userListIcon;
+      text = "MANAGE USERS";
+      break;
+    case "animalList":
+      icon = animalListIcon;
+      text = "MANAGE ANIMALS";
+      break;
     case "myPets":
       icon = myPetsIcon;
       text = "MY PETS";
