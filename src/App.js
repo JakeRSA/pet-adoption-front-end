@@ -134,7 +134,11 @@ function App() {
         />
         {/* <ManageUsers /> */}
         {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
-        {/* <PetEdit animalTypeOptions={animalTypesToOptions()}/> */}
+        <PetEdit
+          animalTypeOptions={animalTypesToOptions()}
+          baseServerUrl={baseServerUrl}
+          authConfig={authConfig}
+        />
         {/* <AdminDash /> */}
         {/* <SearchPage isAdvanced={false} animalTypeOptions={animalTypesToOptions()}/> */}
         {/* <WelcomePage
@@ -144,7 +148,7 @@ function App() {
           }}
         /> */}
 
-        {/* <Switch>
+        <Switch>
           <Route exact path="/">
             {currentUser ? (
               <WelcomePage
@@ -166,17 +170,17 @@ function App() {
                 }}
               />
             )}
-          </Route> */}
+          </Route>
 
-        <ManageUsers />
+          {/* <ManageUsers /> */}
 
-        {/* <Route path="/profile">
+          {/* <Route path="/profile">
             <ProfilePage currentUser={currentUser} />
           </Route>
           <Route path="/search">
             <SearchPage />
           </Route> */}
-        {/* </Switch> */}
+        </Switch>
       </Router>
     </div>
   );
