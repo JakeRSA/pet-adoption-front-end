@@ -13,7 +13,7 @@ function PetCardList(props) {
         id={id}
         name={animal.name}
         imageUrl={animal.imageUrl}
-        adoptionStatus={animal.adoptionStatus}
+        status={animal.status}
       />
     );
   });

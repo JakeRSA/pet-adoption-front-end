@@ -13,7 +13,7 @@ function PetPage(props) {
     birthdate: "2016-05-01",
     weight: 12,
     height: 60,
-    adoptionStatus: "foster",
+    status: "foster",
     imageUrl: "../my_profile.jpg",
     carerId: 1,
     color: "brown",
@@ -51,7 +51,7 @@ function PetPage(props) {
                 animal.type.slice(0, 1).toUpperCase() +
                 animal.type.slice(1, animal.type.length)
               }`}</h1>
-              {animal.adoptionStatus === "has owner" || (
+              {animal.status === "has owner" || (
                 <button className="adopt-btn">adopt or foster now</button>
               )}
             </span>

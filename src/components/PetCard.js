@@ -3,13 +3,13 @@ import samplePetImg from "../my_pets.jpg";
 import "../styles/PetCard.css";
 
 function PetCard(props) {
-  let adoptionStatus;
-  if (props.adoptionStatus === "foster") {
-    adoptionStatus = "in a foster home";
-  } else if (props.adoptionStatus === "has owner") {
-    adoptionStatus = "has a forever home";
+  let status;
+  if (props.status === "foster") {
+    status = "in a foster home";
+  } else if (props.status === "has owner") {
+    status = "has a forever home";
   } else {
-    adoptionStatus = "looking for a home";
+    status = "looking for a home";
   }
 
   return (
@@ -19,7 +19,7 @@ function PetCard(props) {
       </div>
       <div className="basic-info-container">
         <h2>{props.name}</h2>
-        <p>{adoptionStatus}</p>
+        <p>{status}</p>
       </div>
       <button className="submit">go to details</button>
     </div>

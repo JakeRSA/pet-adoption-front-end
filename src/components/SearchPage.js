@@ -8,7 +8,7 @@ function SearchPage(props) {
   const formik = useFormik({
     initialValues: {
       name: "",
-      adoptionStatus: "",
+      status: "",
       minHeight: 0,
       maxHeight: 0,
       minWeight: 0,
@@ -76,7 +76,7 @@ function SearchPage(props) {
         </label>
         <select
           id="status"
-          name="adoptionStatus"
+          name="status"
           onChange={formik.handleChange}
           value={formik.values.status}
         >
