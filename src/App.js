@@ -24,6 +24,22 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [authConfig, setauthConfig] = useState({});
 
+  const testAnimal = {
+    _id: "5fec56afbc2bbb5fa03ef9ae",
+    name: "doggy",
+    type: "dog",
+    breed: "husky",
+    birthdate: 1606780800000,
+    weight: 3,
+    height: 4,
+    color: "brown",
+    hypoallergenic: false,
+    diet: "",
+    bio: "",
+    status: "available",
+    imageFileName: "1609324206438.jpg",
+  };
+
   useEffect(() => {
     getCurrentUserData(authConfig);
     setModalIsOpen(false);
@@ -135,6 +151,7 @@ function App() {
         {/* <ManageUsers /> */}
         {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
         <PetEdit
+          animal={testAnimal}
           animalTypeOptions={animalTypesToOptions()}
           baseServerUrl={baseServerUrl}
           authConfig={authConfig}

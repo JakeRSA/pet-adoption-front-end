@@ -1,46 +1,37 @@
 import React from "react";
 import "../styles/PetEdit.css";
 import { Formik, Form, Field } from "formik";
-import { useState } from "react";
 import axios from "axios";
 
 function PetEdit(props) {
-  const [petImage, setpetImage] = useState(null);
-
+  const animalTypeOptions = props.animalTypeOptions;
+  const baseServerUrl = props.baseServerUrl;
   const animal = props.animal ? props.animal : {};
   const {
     name = "",
-    type = "",
+    type = "dog",
     breed = "",
     birthdate = "",
     weight = 0,
     height = 0,
-    image = undefined,
+    imageFile = undefined,
+    imageFileName = "",
     color = "",
     hypoallergenic = false,
     diet = "",
     bio = "",
   } = animal;
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     name,
-  //     type,
-  //     breed,
-  //     birthdate,
-  //     weight,
-  //     height,
-  //     image,
-  //     color,
-  //     hypoallergenic,
-  //     diet,
-  //     bio,
-  //   },
-  //   onSubmit: (values) => {
-  //     console.log(values);
-  //     // axios.post("http://localhost:5000/pet", values, props.authConfig);
-  //   },
-  // });
+  let birthdateFormatted = "";
+  if (birthdate) {
+    const bd = new Date(birthdate);
+    const yyyy = bd.getFullYear();
+    const mm =
+      bd.getMonth() < 9 ? `0${bd.getMonth() + 1}` : `${bd.getMonth() + 1}`;
+    const dd = bd.getDate() < 9 ? `0${bd.getDate()}` : `${bd.getDate()}`;
+    birthdateFormatted = `${yyyy}-${mm}-${dd}`;
+  }
+
   return (
     <div className="main-container">
       <h1>Add New Animal</h1>
@@ -49,21 +40,37 @@ function PetEdit(props) {
           name,
           type,
           breed,
-          birthdate,
+          birthdate: birthdateFormatted,
           weight,
           height,
-          image,
+          imageFile,
+          imageFileName,
           color,
           hypoallergenic,
           diet,
           bio,
         }}
         onSubmit={(values) => {
-          console.log(values);
-          // axios.post("http://localhost:5000/pet", values, props.authConfig);
+          let data = new FormData();
+          for (let key of Object.keys(values)) {
+            data.append(key, values[key]);
+          }
+          if (props.animal) {
+            axios
+              .put(
+                `${props.baseServerUrl}/pet/${props.animal._id}`,
+                data,
+                props.authConfig
+              )
+              .catch((e) => console.log(e.response.data));
+          } else {
+            axios
+              .post(`${props.baseServerUrl}/pet`, data, props.authConfig)
+              .catch((e) => {
+                console.log(e.response.data);
+              });
+          }
         }}
-        // method="POST"
-        // action={props.baseServerUrl + "/pet"}
       >
         {(props) => (
           <Form className="add-edit-animal-form" encType="multipart/form-data">
@@ -74,7 +81,7 @@ function PetEdit(props) {
             <span>
               <label htmlFor="type">type:</label>
               <Field as="select" id="type" name="type">
-                {props.animalTypeOptions}
+                {animalTypeOptions}
               </Field>
             </span>
             <span>
@@ -135,8 +142,9 @@ function PetEdit(props) {
                 <div className="img-container">
                   <img
                     src={
-                      props.values.imageFile &&
-                      URL.createObjectURL(props.values.imageFile)
+                      props.values.imageFile
+                        ? URL.createObjectURL(props.values.imageFile)
+                        : baseServerUrl + "/pet_images/" + imageFileName
                     }
                     alt="preview"
                   />
