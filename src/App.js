@@ -11,9 +11,11 @@ import PetEdit from "./components/PetEdit";
 import ManageUsers from "./components/ManageUsers";
 import Modal from "react-modal";
 import ServerContext from "./contexts/ServerContext";
+import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import MyPets from "./components/MyPets";
 
 Modal.setAppElement("#root");
 
@@ -23,17 +25,12 @@ function App() {
   const [isNewUser, setIsNewUser] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [authConfig, setauthConfig] = useState({});
-
-  const testUser = {
-    _id: "5fe9c650821a4a2580500e96",
-    firstName: "Jake",
-    lastName: "Nudelman",
-    email: "jakenudels@gmail.com",
-    phone: "+123",
-    type: "admin",
-    dateCreated: 1609156176204,
-  };
+  const [authConfig, setauthConfig] = useState({
+    headers: {
+      user_email: JSON.parse(localStorage.getItem("user_email")),
+      authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
+    },
+  });
 
   useEffect(() => {
     getCurrentUserData(authConfig);
@@ -113,87 +110,93 @@ function App() {
 
   return (
     <ServerContext.Provider value={baseServerUrl}>
-      <div className="App">
-        <Router>
-          <SignUpModal
-            isOpen={modalIsOpen}
-            onCloseModal={handleCloseModal}
-            isNewUser={isNewUser}
-            onSignUp={(values) => {
-              handleSignUpSubmit(values);
-            }}
-            onSignIn={(values) => {
-              handleSignInSubmit(values);
-            }}
-          />
-          <Header
-            isSignedIn={!!currentUser}
-            onLogInClick={() => {
-              handleOpenModal();
-            }}
-            onLogOutClick={() => {
-              handleLogOut();
-            }}
-          />
-          {/* <ManageUsers /> */}
-          {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
-          {/* <PetEdit
+      <AuthContext.Provider value={authConfig}>
+        <div className="App">
+          <Router>
+            <Header
+              isSignedIn={!!currentUser}
+              onLogInClick={() => {
+                handleOpenModal();
+              }}
+              onLogOutClick={() => {
+                handleLogOut();
+              }}
+            />
+            <SignUpModal
+              isOpen={modalIsOpen}
+              onCloseModal={handleCloseModal}
+              isNewUser={isNewUser}
+              onSignUp={(values) => {
+                handleSignUpSubmit(values);
+              }}
+              onSignIn={(values) => {
+                handleSignInSubmit(values);
+              }}
+            />
+
+            {/* <ManageUsers /> */}
+            {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
+            {/* <PetEdit
           animal={testAnimal}
           animalTypeOptions={animalTypesToOptions()}
           baseServerUrl={baseServerUrl}
           authConfig={authConfig}
         /> */}
-          {/* <AdminDash /> */}
-          <SearchPage
+            {/* <AdminDash /> */}
+            {/* <SearchPage
             isAdvanced={false}
             animalTypesToOptions={animalTypesToOptions}
-          />
-          {/* <WelcomePage
+          /> */}
+            {/* <WelcomePage
           currentUser={currentUser}
           handleLogOut={() => {
             handleLogOut();
           }}
         /> */}
 
-          <Switch>
-            <Route exact path="/">
-              {currentUser ? (
-                <WelcomePage
+            <Switch>
+              <Route exact path="/">
+                {currentUser ? (
+                  <WelcomePage
+                    currentUser={currentUser}
+                    handleLogOut={() => {
+                      handleLogOut();
+                    }}
+                  />
+                ) : (
+                  <HomePage
+                    onOpenModal={(formType) => {
+                      handleOpenModal(formType);
+                    }}
+                    handleSignUpSubmit={(values) => {
+                      handleSignUpSubmit(values);
+                    }}
+                    handleSignInSubmit={(values) => {
+                      handleSignInSubmit(values);
+                    }}
+                  />
+                )}
+              </Route>
+
+              {/* <ManageUsers /> */}
+              <Route path="/my-pets">
+                <MyPets savedOrOwned="owned" />
+              </Route>
+
+              <Route path="/profile">
+                <ProfilePage
                   currentUser={currentUser}
-                  handleLogOut={() => {
-                    handleLogOut();
-                  }}
+                  baseServerUrl={baseServerUrl}
+                  authConfig={authConfig}
                 />
-              ) : (
-                <HomePage
-                  onOpenModal={(formType) => {
-                    handleOpenModal(formType);
-                  }}
-                  handleSignUpSubmit={(values) => {
-                    handleSignUpSubmit(values);
-                  }}
-                  handleSignInSubmit={(values) => {
-                    handleSignInSubmit(values);
-                  }}
-                />
-              )}
-            </Route>
-
-            {/* <ManageUsers /> */}
-
-            <Route path="/profile">
-              <ProfilePage
-                currentUser={testUser}
-                baseServerUrl={baseServerUrl}
-                authConfig={authConfig}
-              />
-            </Route>
-            {/* <Route path="/search">
-            <SearchPage />
-          </Route> */}
-          </Switch>
-        </Router>
-      </div>
+              </Route>
+              <Route path="/search">
+                <SearchPage />
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      </AuthContext.Provider>
     </ServerContext.Provider>
   );
 }
