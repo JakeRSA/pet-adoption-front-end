@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import ServerContext from "../contexts/ServerContext";
 import PetCard from "./PetCard";
 import { animals } from "../db.js";
 import "../styles/PetCardList.css";
 
 function PetCardList(props) {
-  const petCards = props.petIds.map((id) => {
-    let animal = animals.find((animal) => animal.animalId === id);
-    console.log(animal);
+  const baseServerUrl = useContext(ServerContext);
+  const petCards = props.pets.map((pet) => {
     return (
       <PetCard
-        key={id}
-        id={id}
-        name={animal.name}
-        imageUrl={animal.imageUrl}
-        status={animal.status}
+        key={pet.id}
+        id={pet.id}
+        name={pet.name}
+        imageUrl={`${baseServerUrl}/pet_images/${pet.imageFileName}`}
+        status={pet.status}
       />
     );
   });

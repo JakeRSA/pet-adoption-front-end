@@ -10,6 +10,7 @@ import PetPage from "./components/PetPage";
 import PetEdit from "./components/PetEdit";
 import ManageUsers from "./components/ManageUsers";
 import Modal from "react-modal";
+import ServerContext from "./contexts/ServerContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -24,20 +25,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [authConfig, setauthConfig] = useState({});
 
-  const testAnimal = {
-    _id: "5fec56afbc2bbb5fa03ef9ae",
-    name: "doggy",
-    type: "dog",
-    breed: "husky",
-    birthdate: 1606780800000,
-    weight: 3,
-    height: 4,
-    color: "brown",
-    hypoallergenic: false,
-    diet: "",
-    bio: "",
-    status: "available",
-    imageFileName: "1609324206438.jpg",
+  const testUser = {
+    _id: "5fe9c650821a4a2580500e96",
+    firstName: "Jake",
+    lastName: "Nudelman",
+    email: "jakenudels@gmail.com",
+    phone: "+123",
+    type: "admin",
+    dateCreated: 1609156176204,
   };
 
   useEffect(() => {
@@ -107,17 +102,8 @@ function App() {
     setCurrentUser(null);
   };
 
-  const animalTypesToOptions = () => {
-    const types = [
-      "dog",
-      "cat",
-      "bird",
-      "rodent",
-      "fish",
-      "reptile",
-      "insect",
-      "other",
-    ];
+  const animalTypesToOptions = async () => {
+    const types = (await axios.get(baseServerUrl + "/types")).data;
     return types.map((type) => (
       <option key={type} value={type}>
         {type}
@@ -126,80 +112,89 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Router>
-        <SignUpModal
-          isOpen={modalIsOpen}
-          onCloseModal={handleCloseModal}
-          isNewUser={isNewUser}
-          onSignUp={(values) => {
-            handleSignUpSubmit(values);
-          }}
-          onSignIn={(values) => {
-            handleSignInSubmit(values);
-          }}
-        />
-        <Header
-          isSignedIn={!!currentUser}
-          onLogInClick={() => {
-            handleOpenModal();
-          }}
-          onLogOutClick={() => {
-            handleLogOut();
-          }}
-        />
-        {/* <ManageUsers /> */}
-        {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
-        <PetEdit
+    <ServerContext.Provider value={baseServerUrl}>
+      <div className="App">
+        <Router>
+          <SignUpModal
+            isOpen={modalIsOpen}
+            onCloseModal={handleCloseModal}
+            isNewUser={isNewUser}
+            onSignUp={(values) => {
+              handleSignUpSubmit(values);
+            }}
+            onSignIn={(values) => {
+              handleSignInSubmit(values);
+            }}
+          />
+          <Header
+            isSignedIn={!!currentUser}
+            onLogInClick={() => {
+              handleOpenModal();
+            }}
+            onLogOutClick={() => {
+              handleLogOut();
+            }}
+          />
+          {/* <ManageUsers /> */}
+          {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
+          {/* <PetEdit
           animal={testAnimal}
           animalTypeOptions={animalTypesToOptions()}
           baseServerUrl={baseServerUrl}
           authConfig={authConfig}
-        />
-        {/* <AdminDash /> */}
-        {/* <SearchPage isAdvanced={false} animalTypeOptions={animalTypesToOptions()}/> */}
-        {/* <WelcomePage
+        /> */}
+          {/* <AdminDash /> */}
+          <SearchPage
+            isAdvanced={false}
+            animalTypesToOptions={animalTypesToOptions}
+          />
+          {/* <WelcomePage
           currentUser={currentUser}
           handleLogOut={() => {
             handleLogOut();
           }}
         /> */}
 
-        <Switch>
-          <Route exact path="/">
-            {currentUser ? (
-              <WelcomePage
-                currentUser={currentUser}
-                handleLogOut={() => {
-                  handleLogOut();
-                }}
-              />
-            ) : (
-              <HomePage
-                onOpenModal={(formType) => {
-                  handleOpenModal(formType);
-                }}
-                handleSignUpSubmit={(values) => {
-                  handleSignUpSubmit(values);
-                }}
-                handleSignInSubmit={(values) => {
-                  handleSignInSubmit(values);
-                }}
-              />
-            )}
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              {currentUser ? (
+                <WelcomePage
+                  currentUser={currentUser}
+                  handleLogOut={() => {
+                    handleLogOut();
+                  }}
+                />
+              ) : (
+                <HomePage
+                  onOpenModal={(formType) => {
+                    handleOpenModal(formType);
+                  }}
+                  handleSignUpSubmit={(values) => {
+                    handleSignUpSubmit(values);
+                  }}
+                  handleSignInSubmit={(values) => {
+                    handleSignInSubmit(values);
+                  }}
+                />
+              )}
+            </Route>
 
-          {/* <ManageUsers /> */}
+            {/* <ManageUsers /> */}
 
-          {/* <Route path="/profile">
-            <ProfilePage currentUser={currentUser} />
-          </Route>
-          <Route path="/search">
+            <Route path="/profile">
+              <ProfilePage
+                currentUser={testUser}
+                baseServerUrl={baseServerUrl}
+                authConfig={authConfig}
+              />
+            </Route>
+            {/* <Route path="/search">
             <SearchPage />
           </Route> */}
-        </Switch>
-      </Router>
-    </div>
+          </Switch>
+        </Router>
+      </div>
+    </ServerContext.Provider>
   );
 }
 

@@ -1,10 +1,18 @@
 import React from "react";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useContext } from "react";
+import ServerContext from "../contexts/ServerContext";
 import { useFormik } from "formik";
 import SearchBar from "./SearchBar";
 import "../styles/SearchPage.css";
+import PetCardList from "./PetCardList";
 
 function SearchPage(props) {
+  const [isAdvanced, setisAdvanced] = useState(props.isAdvanced);
+  const [results, setResults] = useState([]);
+  const baseServerUrl = useContext(ServerContext);
+  const [animalTypeOptions, setAnimalTypeOptions] = useState(null);
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -16,13 +24,30 @@ function SearchPage(props) {
       type: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      let queryString = "";
+      if (values.name) queryString += `name=${values.name}&`;
+      if (values.status) queryString += `status=${values.status}&`;
+      if (values.minHeight) queryString += `minHeight=${values.minHeight}&`;
+      if (values.maxHeight) queryString += `maxHeight=${values.maxHeight}&`;
+      if (values.minWeight) queryString += `minWeight=${values.minWeight}&`;
+      if (values.maxWeight) queryString += `maxWeight=${values.maxWeight}&`;
+      if (values.type) queryString += `type=${values.type}&`;
+      axios.get(baseServerUrl + `/pet?${queryString}`).then((res) => {
+        setResults(res.data);
+      });
     },
   });
 
-  const [isAdvanced, setisAdvanced] = useState(props.isAdvanced);
+  const onBasicSubmit = (values) => {
+    axios.get(baseServerUrl + `/pet?type=${values.type}`).then((res) => {
+      setResults(res.data);
+    });
+  };
 
-  const handleToggleAdvanced = () => {
+  const handleToggleAdvanced = async () => {
+    if (!isAdvanced) {
+      setAnimalTypeOptions(await props.animalTypesToOptions());
+    }
     setisAdvanced(!isAdvanced);
   };
 
@@ -37,25 +62,14 @@ function SearchPage(props) {
     </button>
   );
 
-  const animalTypesToOptions = () => {
-    const types = [
-      "dog",
-      "cat",
-      "bird",
-      "rodent",
-      "fish",
-      "reptile",
-      "insect",
-      "other",
-    ];
-    return types.map((type) => (
-      <option key={type} value={type}>
-        {type}
-      </option>
-    ));
-  };
-
-  const basicSearch = <SearchBar type={formik.values.type} />;
+  const basicSearch = (
+    <SearchBar
+      type={formik.values.type}
+      onSubmit={(values) => {
+        onBasicSubmit(values);
+      }}
+    />
+  );
 
   const advancedSearch = (
     <form className="advanced-search-form" onSubmit={formik.handleSubmit}>
@@ -80,9 +94,10 @@ function SearchPage(props) {
           onChange={formik.handleChange}
           value={formik.values.status}
         >
-          <option value="needsHome">looking for a home</option>
+          <option value="">any</option>
+          <option value="available">looking for a home</option>
           <option value="fostered">in foster care</option>
-          <option value="adopted">has a home</option>
+          <option value="has owner">has a home</option>
         </select>
       </span>
       <span>
@@ -149,7 +164,8 @@ function SearchPage(props) {
           onChange={formik.handleChange}
           value={formik.values.type}
         >
-          {animalTypesToOptions()}
+          <option value="">any</option>
+          {animalTypeOptions}
         </select>
       </span>
       <input type="submit" className="submit" value="search" />
@@ -161,6 +177,7 @@ function SearchPage(props) {
       <h1>{isAdvanced ? "Advanced Search" : "Basic Search"}</h1>
       {isAdvanced ? advancedSearch : basicSearch}
       {toggle}
+      <PetCardList pets={results} />
     </div>
   );
 }

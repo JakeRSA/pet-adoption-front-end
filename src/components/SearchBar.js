@@ -3,12 +3,13 @@ import { useFormik } from "formik";
 import "../styles/SearchBar.css";
 
 function SearchBar(props) {
+
   const formik = useFormik({
     initialValues: {
-      type: props.type ? props.type : '',
+      type: props.type ? props.type : "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      props.onSubmit(values)
     },
   });
   return (

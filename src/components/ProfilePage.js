@@ -3,12 +3,25 @@ import Header from "./Header";
 import { useFormik } from "formik";
 import { useState } from "react";
 import "../styles/ProfilePage.css";
+import axios from "axios";
 
 function ProfilePage(props) {
   const [canEdit, setCanEdit] = useState(false);
 
   const formik = useFormik({
     initialValues: props.currentUser,
+    onSubmit: (values) => {
+      axios
+        .put(
+          props.baseServerUrl + "/user/" + props.currentUser._id,
+          values,
+          props.authConfig
+        )
+        .then(setCanEdit(false))
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   });
 
   return (
@@ -32,6 +45,7 @@ function ProfilePage(props) {
               id="lastName"
               className={canEdit || "no-edit-field"}
               value={formik.values.lastName}
+              onChange={formik.handleChange}
               disabled={!canEdit}
             ></input>
           </fieldset>
@@ -41,6 +55,7 @@ function ProfilePage(props) {
               id="phone"
               className={canEdit || "no-edit-field"}
               value={formik.values.phone}
+              onChange={formik.handleChange}
               disabled={!canEdit}
             ></input>
           </fieldset>
@@ -48,9 +63,10 @@ function ProfilePage(props) {
             <label htmlFor="email">Email</label>
             <input
               id="email"
-              className={"no-edit-field"}
+              className={canEdit || "no-edit-field"}
               value={formik.values.email}
-              disabled={true}
+              onChange={formik.handleChange}
+              disabled={!canEdit}
             ></input>
           </fieldset>
           <fieldset>
@@ -59,16 +75,19 @@ function ProfilePage(props) {
               id="bio"
               className={canEdit || "no-edit-textarea"}
               value={formik.values.bio}
+              onChange={formik.handleChange}
               disabled={!canEdit}
             ></textarea>
           </fieldset>
         </form>
         <span className="do-stuff-btns">
-          <button
-            onClick={canEdit ? () => setCanEdit(false) : () => setCanEdit(true)}
-          >
-            {canEdit ? "Save changes" : "Edit profile"}
-          </button>
+          {canEdit ? (
+            <button type="submit" onClick={formik.handleSubmit}>
+              Save changes
+            </button>
+          ) : (
+            <button onClick={setCanEdit(true)}>Edit profile</button>
+          )}
           <button>Change password</button>
         </span>
       </section>
