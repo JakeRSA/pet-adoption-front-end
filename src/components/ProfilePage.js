@@ -1,95 +1,127 @@
 import React from "react";
-import Header from "./Header";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { Formik, Form, Field } from "formik";
+import AuthContext from "../contexts/AuthContext";
+import ServerContext from "../contexts/ServerContext";
 import "../styles/ProfilePage.css";
 import axios from "axios";
 
 function ProfilePage(props) {
+  const authConfig = useContext(AuthContext);
+  const baseServerUrl = useContext(ServerContext);
   const [canEdit, setCanEdit] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState({});
 
-  const formik = useFormik({
-    initialValues: props.currentUser,
-    onSubmit: (values) => {
-      axios
-        .put(
-          props.baseServerUrl + "/user/" + props.currentUser._id,
-          values,
-          props.authConfig
-        )
-        .then(setCanEdit(false))
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-  });
+  useEffect(() => {
+    let mounted = true;
+    axios.get(baseServerUrl + "/currentuser", authConfig).then((user) => {
+      setUser(user.data);
+      if (mounted) {
+        setLoading(false);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <div>
       <section className="main-section">
         <h1>My Profile</h1>
-        <form>
-          <fieldset>
-            <label htmlFor="firstName">First name</label>
-            <input
-              id="firstName"
-              className={canEdit || "no-edit-field"}
-              value={formik.values.firstName}
-              onChange={formik.handleChange}
-              disabled={!canEdit}
-            ></input>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="lastName">Last name</label>
-            <input
-              id="lastName"
-              className={canEdit || "no-edit-field"}
-              value={formik.values.lastName}
-              onChange={formik.handleChange}
-              disabled={!canEdit}
-            ></input>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="phone">Phone</label>
-            <input
-              id="phone"
-              className={canEdit || "no-edit-field"}
-              value={formik.values.phone}
-              onChange={formik.handleChange}
-              disabled={!canEdit}
-            ></input>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className={canEdit || "no-edit-field"}
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              disabled={!canEdit}
-            ></input>
-          </fieldset>
-          <fieldset>
-            <label htmlFor="bio">Short bio</label>
-            <textarea
-              id="bio"
-              className={canEdit || "no-edit-textarea"}
-              value={formik.values.bio}
-              onChange={formik.handleChange}
-              disabled={!canEdit}
-            ></textarea>
-          </fieldset>
-        </form>
-        <span className="do-stuff-btns">
-          {canEdit ? (
-            <button type="submit" onClick={formik.handleSubmit}>
-              Save changes
-            </button>
-          ) : (
-            <button onClick={setCanEdit(true)}>Edit profile</button>
+        <Formik
+          initialValues={user}
+          enableReinitialize={true}
+          onSubmit={(values) => {
+            axios
+              .put(
+                props.baseServerUrl + "/user/" + props.currentUser._id,
+                values,
+                props.authConfig
+              )
+              .then(setCanEdit(false))
+              .catch((e) => {
+                console.log(e);
+              });
+          }}
+        >
+          {(props) => (
+            <Form>
+              <fieldset>
+                <label htmlFor="firstName">First name</label>
+                <Field
+                  id="firstName"
+                  name="firstName"
+                  className={canEdit || "no-edit-field"}
+                  disabled={!canEdit}
+                ></Field>
+              </fieldset>
+              <fieldset>
+                <label htmlFor="lastName">Last name</label>
+                <Field
+                  id="lastName"
+                  name="lastName"
+                  className={canEdit || "no-edit-field"}
+                  disabled={!canEdit}
+                ></Field>
+              </fieldset>
+              <fieldset>
+                <label htmlFor="phone">Phone</label>
+                <Field
+                  id="phone"
+                  name="phone"
+                  className={canEdit || "no-edit-field"}
+                  disabled={!canEdit}
+                ></Field>
+              </fieldset>
+              <fieldset>
+                <label htmlFor="email">Email</label>
+                <Field
+                  id="email"
+                  name="email"
+                  className={canEdit || "no-edit-field"}
+                  disabled={!canEdit}
+                ></Field>
+              </fieldset>
+              <fieldset>
+                <label htmlFor="bio">Short bio</label>
+                <Field
+                  as="textarea"
+                  id="bio"
+                  name="bio"
+                  className={canEdit || "no-edit-textarea"}
+                  disabled={!canEdit}
+                ></Field>
+              </fieldset>
+
+              <span className="do-stuff-btns">
+                {canEdit ? (
+                  <>
+                    <button type="submit">Save changes</button>
+                    <button
+                      onClick={() => {
+                        setCanEdit(false);
+                      }}
+                    >
+                      Cancel changes
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setCanEdit(true);
+                    }}
+                  >
+                    Edit profile
+                  </button>
+                )}
+                <button>Change password</button>
+              </span>
+            </Form>
           )}
-          <button>Change password</button>
-        </span>
+        </Formik>
       </section>
     </div>
   );
