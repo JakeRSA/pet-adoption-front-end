@@ -95,6 +95,8 @@ function App() {
   };
 
   const handleLogOut = () => {
+    localStorage.removeItem("user_email");
+    localStorage.removeItem("token");
     setCurrentUser(null);
   };
 
@@ -143,12 +145,6 @@ function App() {
             isAdvanced={false}
             animalTypesToOptions={animalTypesToOptions}
           /> */}
-            {/* <WelcomePage
-          currentUser={currentUser}
-          handleLogOut={() => {
-            handleLogOut();
-          }}
-        /> */}
 
             <Switch>
               <Route exact path="/">

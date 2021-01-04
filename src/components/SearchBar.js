@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import "../styles/SearchBar.css";
+import { useLocation } from "react-router-dom";
 
 function SearchBar(props) {
+  // convert url query string to object
+  const queryString = useLocation().search;
+  const params = queryString.slice(1, queryString.length).split("&");
+  let paramObj = {};
+  params.forEach((param) => {
+    const keyVal = param.split("=");
+    paramObj[keyVal[0]] = keyVal[1];
+  });
 
   const formik = useFormik({
     initialValues: {
-      type: props.type ? props.type : "",
+      type: paramObj.type ? paramObj.type : "",
     },
     onSubmit: (values) => {
-      props.onSubmit(values)
+      props.onSubmit(values);
     },
   });
+
+  useEffect(() => {
+    if (paramObj.type) {
+      formik.handleSubmit();
+    }
+  }, []);
+
   return (
     <form className="search-bar" onSubmit={formik.handleSubmit}>
       <input

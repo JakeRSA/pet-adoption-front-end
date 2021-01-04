@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./SearchBar";
 import "../styles/WelcomePage.css";
 import NavCard from "./NavCard";
-import { Switch, Link } from "react-router-dom";
+import { Switch, Link, useHistory } from "react-router-dom";
 
 function WelcomePage(props) {
+  let history = useHistory();
+  const handleSearch = (values) => {
+    history.push("/search?type=" + values.type);
+  };
+
   return (
     <Switch>
       <div>
         <section className="main-section">
           <h1 className="welcome-msg">{`Welcome, ${props.currentUser.firstName} ${props.currentUser.lastName}`}</h1>
           <div className="search-container">
-            <SearchBar />
+            <SearchBar onSubmit={handleSearch} />
             <button className="advanced-btn">advanced search</button>
           </div>
           <div className="nav-cards">
