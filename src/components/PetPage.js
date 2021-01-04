@@ -1,27 +1,29 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import ServerContext from "../contexts/ServerContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/PetPage.css";
-import tempImg from "../my_pets.jpg";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function PetPage(props) {
-  const animal = {
-    animalId: 1,
-    name: "Spot",
-    type: "dog",
-    breed: "French bulldog",
-    birthdate: "2016-05-01",
-    weight: 12,
-    height: 60,
-    status: "foster",
-    imageUrl: "../my_profile.jpg",
-    carerId: 1,
-    color: "brown",
-    hypoallergenic: true,
-    diet: "vegan, gluten-free, no tree nuts, organic produce only",
-    bio:
-      "Spot is a good boy and likes to have his tummy rubbed. He also doe snot like to spend time with mixed breed dogs",
-  };
+  const baseServerUrl = useContext(ServerContext);
+  const [loading, setLoading] = useState(true);
+  const [animal, setAnimal] = useState({});
+  const { id } = useParams();
+
+  useEffect(() => {
+    let mounted = true;
+    axios.get(baseServerUrl + `/pet/${id}`).then((animal) => {
+      setAnimal(animal.data);
+      if (mounted) {
+        setLoading(false);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const getAgeString = () => {
     const dateNow = new Date();
@@ -34,16 +36,16 @@ function PetPage(props) {
     } else return `${years} years and ${remMonths} months`;
   };
 
-  return (
-    <div className="main-container">
-      <span className="back-btn">
-        <FontAwesomeIcon icon={faAngleLeft} />
-        <p>back</p>
-      </span>
+  let mainDetailsContainer;
+  if (!loading) {
+    mainDetailsContainer = (
       <div className="main-details-container">
         <div className="animal-summary-container">
           <div className="img-container">
-            <img src={tempImg} alt={animal.name}></img>
+            <img
+              src={`${baseServerUrl}/pet_images/${animal.imageFileName}`}
+              alt={animal.name}
+            ></img>
           </div>
           <div className="animal-basic-container">
             <span className="pet-details-header">
@@ -87,11 +89,21 @@ function PetPage(props) {
           </span>
           <span className="detail-row">
             <h4>dietary restrictions:</h4>
-            <p>{animal.diet}</p>
+            <p>{animal.diet ? animal.diet : "none"}</p>
           </span>
         </div>
         <button className="bookmark-btn">add to saved list</button>
       </div>
+    );
+  }
+
+  return (
+    <div className="main-container">
+      <span className="back-btn">
+        <FontAwesomeIcon icon={faAngleLeft} />
+        <p>back</p>
+      </span>
+      {loading || mainDetailsContainer}
     </div>
   );
 }

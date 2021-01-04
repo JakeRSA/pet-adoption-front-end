@@ -9,8 +9,8 @@ function PetCardList(props) {
   const petCards = props.pets.map((pet) => {
     return (
       <PetCard
-        key={pet.id}
-        id={pet.id}
+        key={pet._id}
+        id={pet._id}
         name={pet.name}
         imageUrl={`${baseServerUrl}/pet_images/${pet.imageFileName}`}
         status={pet.status}

@@ -132,9 +132,6 @@ function App() {
                 handleSignInSubmit(values);
               }}
             />
-
-            {/* <ManageUsers /> */}
-            {/* <PetCardList petIds={[1, 2, 3]} header={"My Pets"} /> */}
             {/* <PetEdit
           animal={testAnimal}
           animalTypeOptions={animalTypesToOptions()}
@@ -182,21 +179,21 @@ function App() {
               <Route path="/all-pets">
                 {/* need to sort this out still */}
               </Route>
-
-              {/* <ManageUsers /> */}
               <Route path="/my-pets">
                 <MyPets savedOrOwned="owned" />
               </Route>
               <Route path="/saved-pets">
                 <MyPets savedOrOwned="saved" />
               </Route>
-
               <Route path="/profile">
                 <ProfilePage
                   currentUser={currentUser}
                   baseServerUrl={baseServerUrl}
                   authConfig={authConfig}
                 />
+              </Route>
+              <Route path="/pet/:id">
+                <PetPage />
               </Route>
               <Route path="/search">
                 <SearchPage />

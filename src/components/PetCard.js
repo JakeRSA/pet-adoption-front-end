@@ -1,4 +1,5 @@
 import React from "react";
+import { Switch, Link } from "react-router-dom";
 import samplePetImg from "../my_pets.jpg";
 import "../styles/PetCard.css";
 
@@ -21,7 +22,11 @@ function PetCard(props) {
         <h2>{props.name}</h2>
         <p>{status}</p>
       </div>
-      <button className="submit">go to details</button>
+      <Switch>
+        <Link className="visited" to={`/pet/${props.id}`}>
+          <button className="submit">go to details</button>
+        </Link>
+      </Switch>
     </div>
   );
 }
