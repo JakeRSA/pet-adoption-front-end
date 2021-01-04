@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
 import PetCardList from "./PetCardList";
@@ -8,8 +8,10 @@ function MyPets(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
   const [petList, setPetList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const getOwnedPets = () => {
-    axios.get(baseServerUrl + `/currentuser`, authConfig).then((res) => {
+    return axios.get(baseServerUrl + `/currentuser`, authConfig).then((res) => {
       axios
         .get(baseServerUrl + `/pet/user/${res.data._id}`, authConfig)
         .then((res) => {
@@ -17,9 +19,8 @@ function MyPets(props) {
         });
     });
   };
-
   const getSavedPets = () => {
-    axios.get(baseServerUrl + `/currentuser`, authConfig).then((res) => {
+    return axios.get(baseServerUrl + `/currentuser`, authConfig).then((res) => {
       axios
         .get(baseServerUrl + `/saved/user/${res.data._id}`, authConfig)
         .then((res) => {
@@ -27,18 +28,29 @@ function MyPets(props) {
         });
     });
   };
+
+  let getPets;
   if (props.savedOrOwned === "owned") {
-    // put spinner
-    getOwnedPets();
-    // end spinner
+    getPets = getOwnedPets;
   } else if (props.savedOrOwned === "saved") {
-    // put spinner
-    getSavedPets();
-    // end spinner
+    getPets = getSavedPets;
   }
+
+  useEffect(() => {
+    let mounted = true;
+    getPets().then(() => {
+      if (mounted) {
+        setLoading(false);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div className="main-container">
-      <h1>My Pets</h1>
+      <h1>{props.savedOrOwned === "owned" ? "My Pets" : "Saved Pets"}</h1>
       <PetCardList pets={petList} />
     </div>
   );

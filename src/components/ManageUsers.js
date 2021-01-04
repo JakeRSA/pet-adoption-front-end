@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/ManageUsers.css";
 
-function ManageUsers(props) {
+function ManageUsers() {
   const users = [
     {
       id: 1,

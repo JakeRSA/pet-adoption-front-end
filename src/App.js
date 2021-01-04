@@ -5,7 +5,6 @@ import HomePage from "./components/HomePage";
 import WelcomePage from "./components/WelcomePage";
 import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
-import PetCardList from "./components/PetCardList";
 import PetPage from "./components/PetPage";
 import PetEdit from "./components/PetEdit";
 import ManageUsers from "./components/ManageUsers";
@@ -177,10 +176,19 @@ function App() {
                   />
                 )}
               </Route>
+              <Route path="/manage-users">
+                <ManageUsers />
+              </Route>
+              <Route path="/all-pets">
+                {/* need to sort this out still */}
+              </Route>
 
               {/* <ManageUsers /> */}
               <Route path="/my-pets">
                 <MyPets savedOrOwned="owned" />
+              </Route>
+              <Route path="/saved-pets">
+                <MyPets savedOrOwned="saved" />
               </Route>
 
               <Route path="/profile">
