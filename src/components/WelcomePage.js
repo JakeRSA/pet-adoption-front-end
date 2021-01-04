@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBar from "./SearchBar";
 import "../styles/WelcomePage.css";
 import NavCard from "./NavCard";
@@ -17,7 +17,9 @@ function WelcomePage(props) {
           <h1 className="welcome-msg">{`Welcome, ${props.currentUser.firstName} ${props.currentUser.lastName}`}</h1>
           <div className="search-container">
             <SearchBar onSubmit={handleSearch} />
+            <Link className="visited" to="/search?advanced">
             <button className="advanced-btn">advanced search</button>
+            </Link>
           </div>
           <div className="nav-cards">
             {props.currentUser.type === "admin" ? (

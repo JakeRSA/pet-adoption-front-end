@@ -6,12 +6,31 @@ import { useFormik } from "formik";
 import SearchBar from "./SearchBar";
 import "../styles/SearchPage.css";
 import PetCardList from "./PetCardList";
+import { useLocation } from "react-router-dom";
 
 function SearchPage(props) {
-  const [isAdvanced, setisAdvanced] = useState(props.isAdvanced);
+  let queryString = useLocation().search;
+  const [isAdvanced, setisAdvanced] = useState(
+    queryString.search("advanced") > 0
+  );
   const [results, setResults] = useState([]);
   const baseServerUrl = useContext(ServerContext);
-  const [animalTypeOptions, setAnimalTypeOptions] = useState(null);
+  const animalTypeOptions = [
+    "dog",
+    "cat",
+    "bird",
+    "rodent",
+    "fish",
+    "reptile",
+    "insect",
+    "other",
+  ].map((type) => {
+    return (
+      <option key={type} value={type}>
+        {type}
+      </option>
+    );
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -45,9 +64,6 @@ function SearchPage(props) {
   };
 
   const handleToggleAdvanced = async () => {
-    if (!isAdvanced) {
-      setAnimalTypeOptions(await props.animalTypesToOptions());
-    }
     setisAdvanced(!isAdvanced);
   };
 
