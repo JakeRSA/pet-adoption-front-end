@@ -152,11 +152,15 @@ function App() {
               <Route path="/manage-users">
                 <ManageUsers />
               </Route>
-              <Route path="/user/:id">
-                {/* need to sort this out */}
-              </Route>
+              <Route path="/user/:id">{/* need to sort this out */}</Route>
               <Route path="/all-pets">
                 <AllPets />
+              </Route>
+              <Route path="/add-pet">
+                <PetEdit />
+              </Route>
+              <Route path="/edit-pet/:id">
+                <PetEdit />
               </Route>
               <Route path="/my-pets">
                 <MyPets savedOrOwned="owned" />

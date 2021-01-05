@@ -1,21 +1,28 @@
 import React, { useEffect, useState, useContext } from "react";
 import ServerContext from "../contexts/ServerContext";
+import AuthContext from "../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/PetPage.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function PetPage(props) {
   const baseServerUrl = useContext(ServerContext);
+  const authConfig = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [animal, setAnimal] = useState({});
+  const [user, setUser] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     let mounted = true;
     axios.get(baseServerUrl + `/pet/${id}`).then((animal) => {
       setAnimal(animal.data);
+      axios.get(baseServerUrl + "/currentuser", authConfig).then((user) => {
+        setUser(user.data);
+        setLoading(false);
+      });
       if (mounted) {
         setLoading(false);
       }
@@ -36,6 +43,26 @@ function PetPage(props) {
     } else return `${years} years and ${remMonths} months`;
   };
 
+  let userActionBtn;
+  if (user.type === "admin") {
+    userActionBtn = (
+      <Link to={`/edit-pet/${animal._id}`}>
+        <button className="adopt-btn">edit details</button>
+      </Link>
+    );
+  } else {
+    if (user._id === animal.carerId) {
+      userActionBtn = <button className="adopt-btn">return to shelter</button>;
+    } else {
+      userActionBtn = (
+        <>
+          <button className="adopt-btn">adopt now</button>
+          <button className="adopt-btn">foster now</button>
+        </>
+      );
+    }
+  }
+
   let mainDetailsContainer;
   if (!loading) {
     mainDetailsContainer = (
@@ -53,9 +80,7 @@ function PetPage(props) {
                 animal.type.slice(0, 1).toUpperCase() +
                 animal.type.slice(1, animal.type.length)
               }`}</h1>
-              {animal.status === "has owner" || (
-                <button className="adopt-btn">adopt or foster now</button>
-              )}
+              {userActionBtn}
             </span>
             <span className="basic-info-row">
               <h4>breed:</h4>

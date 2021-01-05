@@ -1,74 +1,91 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../styles/PetEdit.css";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import ServerContext from "../contexts/ServerContext";
+import AuthContext from "../contexts/AuthContext";
 
 function PetEdit(props) {
-  const animalTypeOptions = props.animalTypeOptions;
-  const baseServerUrl = props.baseServerUrl;
-  const animal = props.animal ? props.animal : {};
-  const {
-    name = "",
-    type = "dog",
-    breed = "",
-    birthdate = "",
-    weight = 0,
-    height = 0,
-    imageFile = undefined,
-    imageFileName = "",
-    color = "",
-    hypoallergenic = false,
-    diet = "",
-    bio = "",
-  } = animal;
+  const baseServerUrl = useContext(ServerContext);
+  const authConfig = useContext(AuthContext);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [animal, setAnimal] = useState({
+    name: "",
+    type: "dog",
+    breed: "",
+    birthdate: "",
+    weight: 0,
+    height: 0,
+    imageFile: undefined,
+    imageFileName: "",
+    color: "",
+    hypoallergenic: false,
+    diet: "",
+    bio: "",
+  });
 
-  let birthdateFormatted = "";
-  if (birthdate) {
+  useEffect(() => {
+    let mounted = true;
+    if (id) {
+      axios.get(baseServerUrl + `/pet/${id}`).then((animal) => {
+        let animalObj = animal.data;
+        animalObj.birthdate = formatBirthdate(animal.data.birthdate);
+        setAnimal(animalObj);
+        setLoading(false);
+      });
+    }
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const animalTypeOptions = [
+    "dog",
+    "cat",
+    "bird",
+    "rodent",
+    "fish",
+    "reptile",
+    "insect",
+    "other",
+  ].map((type) => {
+    return (
+      <option key={type} value={type}>
+        {type}
+      </option>
+    );
+  });
+
+  const formatBirthdate = (birthdate) => {
     const bd = new Date(birthdate);
     const yyyy = bd.getFullYear();
     const mm =
       bd.getMonth() < 9 ? `0${bd.getMonth() + 1}` : `${bd.getMonth() + 1}`;
     const dd = bd.getDate() < 9 ? `0${bd.getDate()}` : `${bd.getDate()}`;
-    birthdateFormatted = `${yyyy}-${mm}-${dd}`;
-  }
+    return `${yyyy}-${mm}-${dd}`;
+  };
 
   return (
     <div className="main-container">
-      <h1>Add New Animal</h1>
+      <h1>{id ? "Edit Animal" : "Add New Animal"}</h1>
       <Formik
-        initialValues={{
-          name,
-          type,
-          breed,
-          birthdate: birthdateFormatted,
-          weight,
-          height,
-          imageFile,
-          imageFileName,
-          color,
-          hypoallergenic,
-          diet,
-          bio,
-        }}
+        initialValues={animal}
+        enableReinitialize={true}
         onSubmit={(values) => {
           let data = new FormData();
           for (let key of Object.keys(values)) {
             data.append(key, values[key]);
           }
-          if (props.animal) {
+          if (id) {
             axios
-              .put(
-                `${props.baseServerUrl}/pet/${props.animal._id}`,
-                data,
-                props.authConfig
-              )
+              .put(`${baseServerUrl}/pet/${id}`, data, authConfig)
               .catch((e) => console.log(e.response.data));
           } else {
-            axios
-              .post(`${props.baseServerUrl}/pet`, data, props.authConfig)
-              .catch((e) => {
-                console.log(e.response.data);
-              });
+            axios.post(`${baseServerUrl}/pet`, data, authConfig).catch((e) => {
+              console.log(e.response.data);
+            });
           }
         }}
       >
@@ -144,7 +161,7 @@ function PetEdit(props) {
                     src={
                       props.values.imageFile
                         ? URL.createObjectURL(props.values.imageFile)
-                        : baseServerUrl + "/pet_images/" + imageFileName
+                        : baseServerUrl + "/pet_images/" + animal.imageFileName
                     }
                     alt="preview"
                   />
@@ -152,11 +169,19 @@ function PetEdit(props) {
               </div>
             </span>
             <span className="submit-span">
-              <input
-                className="submit"
-                type="submit"
-                value="add new animal"
-              ></input>
+              {id ? (
+                <input
+                  className="submit"
+                  type="submit"
+                  value="save changes"
+                ></input>
+              ) : (
+                <input
+                  className="submit"
+                  type="submit"
+                  value="add new animal"
+                ></input>
+              )}
             </span>
           </Form>
         )}
