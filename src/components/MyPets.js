@@ -16,6 +16,7 @@ function MyPets(props) {
         .get(baseServerUrl + `/pet/user/${res.data._id}`, authConfig)
         .then((res) => {
           setPetList(res.data);
+          setLoading(false);
         });
     });
   };
@@ -25,6 +26,7 @@ function MyPets(props) {
         .get(baseServerUrl + `/saved/user/${res.data._id}`, authConfig)
         .then((res) => {
           setPetList(res.data);
+          setLoading(false);
         });
     });
   };
@@ -38,19 +40,25 @@ function MyPets(props) {
 
   useEffect(() => {
     let mounted = true;
-    getPets().then(() => {
-      if (mounted) {
-        setLoading(false);
-      }
-    });
+    getPets();
     return () => {
       mounted = false;
     };
   }, []);
 
+  let emptyPets = <></>;
+  if (!loading && petList.length === 0) {
+    if (props.savedOrOwned === "owned") {
+      emptyPets = <h3>You don't have any pets yet</h3>;
+    } else {
+      emptyPets = <h3>You don't have any saved pets</h3>;
+    }
+  }
+
   return (
     <div className="main-container">
       <h1>{props.savedOrOwned === "owned" ? "My Pets" : "Saved Pets"}</h1>
+      {emptyPets}
       <PetCardList pets={petList} />
     </div>
   );

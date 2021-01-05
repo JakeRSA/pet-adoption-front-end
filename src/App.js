@@ -134,18 +134,6 @@ function App() {
                 handleSignInSubmit(values);
               }}
             />
-            {/* <PetEdit
-          animal={testAnimal}
-          animalTypeOptions={animalTypesToOptions()}
-          baseServerUrl={baseServerUrl}
-          authConfig={authConfig}
-        /> */}
-            {/* <AdminDash /> */}
-            {/* <SearchPage
-            isAdvanced={false}
-            animalTypesToOptions={animalTypesToOptions}
-          /> */}
-
             <Switch>
               <Route exact path="/">
                 {currentUser ? (
