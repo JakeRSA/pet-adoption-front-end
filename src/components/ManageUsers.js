@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/AuthContext";
 import ServerContext from "../contexts/ServerContext";
 import "../styles/ManageUsers.css";
+import { Link } from "react-router-dom";
 
 function ManageUsers() {
   const baseServerUrl = useContext(ServerContext);
@@ -27,14 +28,16 @@ function ManageUsers() {
   let userList;
   if (!loading) {
     userList = users.map((user) => (
-      <li className="item" key={user._id}>
-        <span>
-          <p>{user.firstName + " " + user.lastName}</p>
-          <p>{user.email}</p>
-          <p>{user.phone}</p>
-          <p>{user.type}</p>
-        </span>
-      </li>
+      <Link className="visited" to={`/user/${user._id}`}>
+        <li className="item" key={user._id}>
+          <span>
+            <p>{user.firstName + " " + user.lastName}</p>
+            <p>{user.email}</p>
+            <p>{user.phone}</p>
+            <p>{user.type}</p>
+          </span>
+        </li>
+      </Link>
     ));
   }
 

@@ -44,7 +44,7 @@
   width: 254px;
 }
 
-h2,
+.pet-name,
 h4,
 p {
   display: block;
@@ -52,7 +52,7 @@ p {
   padding: 0;
 }
 
-h2 {
+.pet-name {
   border-bottom: 2px solid black;
 }
 

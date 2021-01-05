@@ -20,7 +20,7 @@ function PetCard(props) {
         <img src={props.imageUrl} alt={props.name}></img>
       </div>
       <div className="basic-info-container">
-        <h2>{props.name}</h2>
+        <h2 className="pet-name">{props.name}</h2>
         <p>{status}</p>
       </div>
       <Switch>

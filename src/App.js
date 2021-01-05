@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AllPets from "./components/AllPets";
+import ViewUser from "./components/ViewUser";
 
 Modal.setAppElement("#root");
 
@@ -152,7 +153,9 @@ function App() {
               <Route path="/manage-users">
                 <ManageUsers />
               </Route>
-              <Route path="/user/:id">{/* need to sort this out */}</Route>
+              <Route path="/user/:id">
+                <ViewUser />
+                </Route>
               <Route path="/all-pets">
                 <AllPets />
               </Route>

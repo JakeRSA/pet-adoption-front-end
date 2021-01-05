@@ -1,0 +1,22 @@
+.view-user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+  .sub-heading {
+    margin-bottom: 0;
+  }
+}
+
+.contact-info {
+  display: flex;
+  justify-content: space-evenly;
+  > * {
+    margin: 10px;
+  }
+}
+
+.bio-span {
+  width: 50%;
+}

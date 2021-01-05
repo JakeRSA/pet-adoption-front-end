@@ -77,14 +77,14 @@ function PetPage(props) {
           <div className="animal-basic-container">
             <span className="pet-details-header">
               <h1>{`${animal.name} the ${
-                animal.type.slice(0, 1).toUpperCase() +
-                animal.type.slice(1, animal.type.length)
+                animal.breed.slice(0, 1).toUpperCase() +
+                animal.breed.slice(1, animal.breed.length)
               }`}</h1>
               {userActionBtn}
             </span>
             <span className="basic-info-row">
-              <h4>breed:</h4>
-              <p>{animal.breed}</p>
+              <h4>type:</h4>
+              <p>{animal.type}</p>
             </span>
             <span className="basic-info-row">
               <h4>age:</h4>
