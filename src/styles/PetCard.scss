@@ -55,3 +55,40 @@ h2 {
     background-color: rgb(17, 16, 16);
   }
 }
+
+.add-new-pet-card {
+  justify-content: center;
+  .flex-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100&;
+  }
+  .inner-border {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 4px;
+    width: calc(100% - 50px);
+    height: calc(100% - 50px);
+  }
+  .big-plus {
+    color: rgb(244, 255, 253);
+    width: 100%;
+    height: 30%;
+  }
+  h3 {
+    color: white;
+    text-decoration: underline;
+  }
+  &:hover {
+    cursor: pointer;
+    .big-plus {
+      height: 33%;
+    }
+  }
+}

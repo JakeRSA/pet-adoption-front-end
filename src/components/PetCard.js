@@ -1,7 +1,8 @@
 import React from "react";
 import { Switch, Link } from "react-router-dom";
-import samplePetImg from "../my_pets.jpg";
 import "../styles/PetCard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 function PetCard(props) {
   let status;
@@ -13,7 +14,7 @@ function PetCard(props) {
     status = "looking for a home";
   }
 
-  return (
+  const petCard = (
     <div className="card">
       <div className="img-container">
         <img src={props.imageUrl} alt={props.name}></img>
@@ -29,6 +30,19 @@ function PetCard(props) {
       </Switch>
     </div>
   );
+
+  const newCard = (
+    <div className="card add-new-pet-card">
+      <Link className="flex-link" to="/add-pet">
+        <div className="inner-border">
+          <FontAwesomeIcon className="big-plus" icon={faPlusCircle} />
+          <h3>add new pet</h3>
+        </div>
+      </Link>
+    </div>
+  );
+
+  return <>{props.new ? newCard : petCard}</>;
 }
 
 export default PetCard;

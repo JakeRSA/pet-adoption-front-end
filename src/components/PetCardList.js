@@ -21,7 +21,10 @@ function PetCardList(props) {
   return (
     <div className="main-section">
       {props.header && <h1>{props.header}</h1>}
-      <div className="cards">{petCards}</div>
+      <div className="cards">
+        {props.addNew && <PetCard new={true} />}
+        {petCards}
+      </div>
     </div>
   );
 }

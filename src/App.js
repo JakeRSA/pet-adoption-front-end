@@ -6,6 +6,7 @@ import WelcomePage from "./components/WelcomePage";
 import ProfilePage from "./components/ProfilePage";
 import SearchPage from "./components/SearchPage";
 import PetPage from "./components/PetPage";
+import MyPets from "./components/MyPets";
 import PetEdit from "./components/PetEdit";
 import ManageUsers from "./components/ManageUsers";
 import Modal from "react-modal";
@@ -13,8 +14,8 @@ import ServerContext from "./contexts/ServerContext";
 import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import MyPets from "./components/MyPets";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AllPets from "./components/AllPets";
 
 Modal.setAppElement("#root");
 
@@ -100,15 +101,6 @@ function App() {
     setCurrentUser(null);
   };
 
-  const animalTypesToOptions = async () => {
-    const types = (await axios.get(baseServerUrl + "/types")).data;
-    return types.map((type) => (
-      <option key={type} value={type}>
-        {type}
-      </option>
-    ));
-  };
-
   return (
     <ServerContext.Provider value={baseServerUrl}>
       <AuthContext.Provider value={authConfig}>
@@ -160,8 +152,11 @@ function App() {
               <Route path="/manage-users">
                 <ManageUsers />
               </Route>
+              <Route path="/user/:id">
+                {/* need to sort this out */}
+              </Route>
               <Route path="/all-pets">
-                {/* need to sort this out still */}
+                <AllPets />
               </Route>
               <Route path="/my-pets">
                 <MyPets savedOrOwned="owned" />
