@@ -13,6 +13,8 @@ function SearchPage(props) {
   const [isAdvanced, setisAdvanced] = useState(
     queryString.search("advanced") > 0
   );
+  const [loading, setLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
   const [results, setResults] = useState([]);
   const baseServerUrl = useContext(ServerContext);
   const animalTypeOptions = [
@@ -43,6 +45,7 @@ function SearchPage(props) {
       type: "",
     },
     onSubmit: (values) => {
+      setLoading(true);
       let queryString = "";
       if (values.name)
         queryString += `name=${values.name.split(" ").join("+")}&`;
@@ -54,17 +57,23 @@ function SearchPage(props) {
       if (values.type) queryString += `type=${values.type}&`;
       axios.get(baseServerUrl + `/pet?${queryString}`).then((res) => {
         setResults(res.data);
+        setHasSearched(true);
+        setLoading(false);
       });
     },
   });
 
   const onBasicSubmit = (values) => {
+    setLoading(true);
     axios.get(baseServerUrl + `/pet?type=${values.type}`).then((res) => {
       setResults(res.data);
+      setHasSearched(true);
+      setLoading(false);
     });
   };
 
   const handleToggleAdvanced = async () => {
+    setHasSearched(false);
     setisAdvanced(!isAdvanced);
   };
 
@@ -188,13 +197,18 @@ function SearchPage(props) {
       <input type="submit" className="submit" value="search" />
     </form>
   );
-
   return (
     <div className="main-section">
       <h1>{isAdvanced ? "Advanced Search" : "Basic Search"}</h1>
       {isAdvanced ? advancedSearch : basicSearch}
       {toggle}
-      <PetCardList pets={results} />
+      {!loading && results.length > 0 ? (
+        <PetCardList pets={results} />
+      ) : (
+        hasSearched && (
+          <h4 className="no-results">your search returned 0 results</h4>
+        )
+      )}
     </div>
   );
 }

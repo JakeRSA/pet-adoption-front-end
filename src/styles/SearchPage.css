@@ -72,4 +72,8 @@
   width: -moz-fit-content;
   width: fit-content;
 }
+
+.no-results {
+  margin-top: 40px;
+}
 /*# sourceMappingURL=SearchPage.css.map */

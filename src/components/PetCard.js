@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/PetCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -23,11 +23,9 @@ function PetCard(props) {
         <h2 className="pet-name">{props.name}</h2>
         <p>{status}</p>
       </div>
-      <Switch>
-        <Link className="visited" to={`/pet/${props.id}`}>
-          <button className="submit">go to details</button>
-        </Link>
-      </Switch>
+      <Link className="visited" to={`/pet/${props.id}`}>
+        <button className="submit">go to details</button>
+      </Link>
     </div>
   );
 

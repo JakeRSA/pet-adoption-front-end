@@ -10,7 +10,7 @@
   width: 40%;
   flex-direction: row;
   flex-wrap: wrap;
-  >* {
+  > * {
     display: block;
   }
   span {
@@ -36,11 +36,15 @@
     width: 3em;
   }
   p {
-    margin-left:2px;
+    margin-left: 2px;
     margin-right: 8px;
   }
   .submit {
     margin-top: 1em;
     width: fit-content;
   }
+}
+
+.no-results {
+  margin-top: 40px;
 }
