@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import ServerContext from "../contexts/ServerContext";
-import AuthContext from "../contexts/AuthContext";
 import axios from "axios";
 import PetCardList from "./PetCardList";
 
 function AllPets() {
   const baseServerUrl = useContext(ServerContext);
-  const authConfig = useContext(AuthContext);
   const [pets, setPets] = useState([]);
   const [loading, setLoading] = useState(true);
 

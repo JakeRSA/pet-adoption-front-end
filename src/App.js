@@ -155,7 +155,7 @@ function App() {
               </Route>
               <Route path="/user/:id">
                 <ViewUser />
-                </Route>
+              </Route>
               <Route path="/all-pets">
                 <AllPets />
               </Route>

@@ -44,7 +44,8 @@ function SearchPage(props) {
     },
     onSubmit: (values) => {
       let queryString = "";
-      if (values.name) queryString += `name=${values.name}&`;
+      if (values.name)
+        queryString += `name=${values.name.split(" ").join("+")}&`;
       if (values.status) queryString += `status=${values.status}&`;
       if (values.minHeight) queryString += `minHeight=${values.minHeight}&`;
       if (values.maxHeight) queryString += `maxHeight=${values.maxHeight}&`;

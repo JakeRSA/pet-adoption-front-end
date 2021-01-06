@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import searchImg from "../search.svg";
 
@@ -16,24 +16,22 @@ function Header(props) {
   );
 
   return (
-    <Switch>
-      <div className="header">
-        <Link className="visited" to="/">
-          <h1 className="company-logo">PETCOUTURE.COM</h1>
+    <div className="header">
+      <Link className="visited" to="/">
+        <h1 className="company-logo">PETCOUTURE.COM</h1>
+      </Link>
+      <span className="mini-tools">
+        <Link className="visited" to="/search">
+          <input
+            className="mini-search-btn"
+            type="image"
+            src={searchImg}
+            alt="Search"
+          />
         </Link>
-        <span className="mini-tools">
-          <Link className="visited" to="/search">
-            <input
-              className="mini-search-btn"
-              type="image"
-              src={searchImg}
-              alt="Search"
-            />
-          </Link>
-          {props.isSignedIn ? logOutButton : signInButton}
-        </span>
-      </div>
-    </Switch>
+        {props.isSignedIn ? logOutButton : signInButton}
+      </span>
+    </div>
   );
 }
 
