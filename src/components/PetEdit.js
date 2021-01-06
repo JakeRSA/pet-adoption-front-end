@@ -2,15 +2,17 @@ import React, { useEffect, useState, useContext } from "react";
 import "../styles/PetEdit.css";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
 
 function PetEdit(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
+  const history = useHistory();
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoadingUpdate] = useState(false);
   const [animal, setAnimal] = useState({
     name: "",
     type: "dog",
@@ -29,6 +31,7 @@ function PetEdit(props) {
   useEffect(() => {
     let mounted = true;
     if (id) {
+      setLoading(true);
       axios.get(baseServerUrl + `/pet/${id}`).then((animal) => {
         let animalObj = animal.data;
         animalObj.birthdate = formatBirthdate(animal.data.birthdate);
@@ -70,122 +73,146 @@ function PetEdit(props) {
   return (
     <div className="main-container">
       <h1>{id ? "Edit Animal" : "Add New Animal"}</h1>
-      <Formik
-        initialValues={animal}
-        enableReinitialize={true}
-        onSubmit={(values) => {
-          let data = new FormData();
-          for (let key of Object.keys(values)) {
-            data.append(key, values[key]);
-          }
-          if (id) {
-            axios
-              .put(`${baseServerUrl}/pet/${id}`, data, authConfig)
-              .catch((e) => console.log(e.response.data));
-          } else {
-            axios.post(`${baseServerUrl}/pet`, data, authConfig).catch((e) => {
-              console.log(e.response.data);
-            });
-          }
-        }}
-      >
-        {(props) => (
-          <Form className="add-edit-animal-form" encType="multipart/form-data">
-            <span>
-              <label htmlFor="name">name:</label>
-              <Field id="name" name="name"></Field>
-            </span>
-            <span>
-              <label htmlFor="type">type:</label>
-              <Field as="select" id="type" name="type">
-                {animalTypeOptions}
-              </Field>
-            </span>
-            <span>
-              <label htmlFor="breed">breed:</label>
-              <Field id="breed" name="breed"></Field>
-            </span>
-            <span>
-              <label htmlFor="birthdate">birthdate:</label>
-              <Field id="birthdate" name="birthdate" type="date"></Field>
-            </span>
-            <span>
-              <label htmlFor="weight">weight:</label>
-              <Field id="weight" name="weight" type="number"></Field>
-              <p>kg</p>
-            </span>
-            <span>
-              <label htmlFor="height">height:</label>
-              <Field id="height" name="height" type="number"></Field>
-              <p>cm</p>
-            </span>
-            <span>
-              <label htmlFor="color">color:</label>
-              <Field id="color" name="color"></Field>
-            </span>
-            <span>
-              <label htmlFor="hypoallergenic">hypoallergenic:</label>
-              <Field as="select" id="hypoallergenic" name="hypoallergenic">
-                <option value={true}>yes</option>
-                <option value={false}>no</option>
-              </Field>
-            </span>
-            <span>
-              <label htmlFor="diet">dietary restrictions:</label>
-              <Field id="diet" name="diet"></Field>
-            </span>
-            <span>
-              <label htmlFor="bio">bio:</label>
-              <Field
-                as="textarea"
-                id="bio"
-                name="bio"
-                placeholder="A short description detailing the animal's behaviour and history..."
-              ></Field>
-            </span>
-            <span>
-              <label htmlFor="photo">photo:</label>
-              <div className="img-select-container">
-                <p>For best results, select an image with 1:1 aspect ratio</p>
+      {loading ? (
+        <h4>loading</h4>
+      ) : (
+        <Formik
+          initialValues={animal}
+          enableReinitialize={true}
+          onSubmit={(values) => {
+            setLoadingUpdate(true);
+            let data = new FormData();
+            for (let key of Object.keys(values)) {
+              data.append(key, values[key]);
+            }
+            if (id) {
+              axios
+                .put(`${baseServerUrl}/pet/${id}`, data, authConfig)
+                .then((res) => {
+                  setLoadingUpdate(false);
+                  history.push("/pet/" + id);
+                })
+                .catch((e) => {
+                  console.log(e.response.data);
+                  setLoadingUpdate(false);
+                });
+            } else {
+              axios
+                .post(`${baseServerUrl}/pet`, data, authConfig)
+                .then((res) => {
+                  setLoadingUpdate(false);
+                  history.push("/pet/" + res.data);
+                })
+                .catch((e) => {
+                  console.log(e.response.data);
+                  setLoadingUpdate(false);
+                });
+            }
+          }}
+        >
+          {(props) => (
+            <Form
+              className="add-edit-animal-form"
+              encType="multipart/form-data"
+            >
+              <span>
+                <label htmlFor="name">name:</label>
+                <Field id="name" name="name"></Field>
+              </span>
+              <span>
+                <label htmlFor="type">type:</label>
+                <Field as="select" id="type" name="type">
+                  {animalTypeOptions}
+                </Field>
+              </span>
+              <span>
+                <label htmlFor="breed">breed:</label>
+                <Field id="breed" name="breed"></Field>
+              </span>
+              <span>
+                <label htmlFor="birthdate">birthdate:</label>
+                <Field id="birthdate" name="birthdate" type="date"></Field>
+              </span>
+              <span>
+                <label htmlFor="weight">weight:</label>
+                <Field id="weight" name="weight" type="number"></Field>
+                <p>kg</p>
+              </span>
+              <span>
+                <label htmlFor="height">height:</label>
+                <Field id="height" name="height" type="number"></Field>
+                <p>cm</p>
+              </span>
+              <span>
+                <label htmlFor="color">color:</label>
+                <Field id="color" name="color"></Field>
+              </span>
+              <span>
+                <label htmlFor="hypoallergenic">hypoallergenic:</label>
+                <Field as="select" id="hypoallergenic" name="hypoallergenic">
+                  <option value={true}>yes</option>
+                  <option value={false}>no</option>
+                </Field>
+              </span>
+              <span>
+                <label htmlFor="diet">dietary restrictions:</label>
+                <Field id="diet" name="diet"></Field>
+              </span>
+              <span>
+                <label htmlFor="bio">bio:</label>
                 <Field
-                  id="photo"
-                  name="image"
-                  type="file"
-                  accept=".jpg,.jpeg,.png"
-                  onChange={(event) => {
-                    props.setFieldValue("imageFile", event.target.files[0]);
-                  }}
+                  as="textarea"
+                  id="bio"
+                  name="bio"
+                  placeholder="A short description detailing the animal's behaviour and history..."
                 ></Field>
-                <div className="img-container">
-                  <img
-                    src={
-                      props.values.imageFile
-                        ? URL.createObjectURL(props.values.imageFile)
-                        : baseServerUrl + "/pet_images/" + animal.imageFileName
-                    }
-                    alt="preview"
-                  />
+              </span>
+              <span>
+                <label htmlFor="photo">photo:</label>
+                <div className="img-select-container">
+                  <p>For best results, select an image with 1:1 aspect ratio</p>
+                  <Field
+                    id="photo"
+                    name="image"
+                    type="file"
+                    accept=".jpg,.jpeg,.png"
+                    onChange={(event) => {
+                      props.setFieldValue("imageFile", event.target.files[0]);
+                    }}
+                  ></Field>
+                  <div className="img-container">
+                    <img
+                      src={
+                        props.values.imageFile
+                          ? URL.createObjectURL(props.values.imageFile)
+                          : baseServerUrl +
+                            "/pet_images/" +
+                            animal.imageFileName
+                      }
+                      alt="preview"
+                    />
+                  </div>
                 </div>
-              </div>
-            </span>
-            <span className="submit-span">
-              {id ? (
-                <input
-                  className="submit"
-                  type="submit"
-                  value="save changes"
-                ></input>
-              ) : (
-                <input
-                  className="submit"
-                  type="submit"
-                  value="add new animal"
-                ></input>
-              )}
-            </span>
-          </Form>
-        )}
-      </Formik>
+              </span>
+              <span className="submit-span">
+                {id ? (
+                  <input
+                    className="submit"
+                    type="submit"
+                    value="save changes"
+                  ></input>
+                ) : (
+                  <input
+                    className="submit"
+                    type="submit"
+                    value="add new animal"
+                  ></input>
+                )}
+              </span>
+            </Form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 }
