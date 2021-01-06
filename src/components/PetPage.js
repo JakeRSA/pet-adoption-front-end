@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import "../styles/PetPage.css";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
@@ -11,6 +9,7 @@ function PetPage(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
+  const [loadingAdopt, setLoadingAdopt] = useState(false);
   const [animal, setAnimal] = useState({});
   const [user, setUser] = useState([]);
   const { id } = useParams();
@@ -43,23 +42,86 @@ function PetPage(props) {
     } else return `${years} years and ${remMonths} months`;
   };
 
+  const handleAdopt = () => {
+    setLoadingAdopt(true);
+    axios
+      .put(baseServerUrl + `/pet/${id}/adopt`, { type: "adopt" }, authConfig)
+      .then((res) => {
+        setLoadingAdopt(false);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleFoster = () => {
+    setLoadingAdopt(true);
+    axios
+      .put(baseServerUrl + `/pet/${id}/adopt`, { type: "foster" }, authConfig)
+      .then(() => {
+        setLoadingAdopt(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleReturnPet = () => {
+    setLoadingAdopt(true);
+    axios
+      .put(baseServerUrl + `/pet/${id}/return`, {}, authConfig)
+      .then(() => {
+        setLoadingAdopt(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  /* determine what actions the user can take based on their user type and relationship to the pet */
   let userActionBtn;
-  if (user.type === "admin") {
-    userActionBtn = (
-      <Link to={`/edit-pet/${animal._id}`}>
-        <button className="adopt-btn">edit details</button>
-      </Link>
-    );
-  } else {
-    if (user._id === animal.carerId) {
-      userActionBtn = <button className="adopt-btn">return to shelter</button>;
-    } else {
+  if (!loading) {
+    if (user.type === "admin") {
       userActionBtn = (
-        <>
-          <button className="adopt-btn">adopt now</button>
-          <button className="adopt-btn">foster now</button>
-        </>
+        <Link to={`/edit-pet/${animal._id}`}>
+          <button className="adopt-btn">edit details</button>
+        </Link>
       );
+    } else {
+      if (user._id === animal.carerId) {
+        userActionBtn = (
+          <button
+            className="adopt-btn"
+            onClick={() => {
+              handleReturnPet();
+            }}
+          >
+            return to shelter
+          </button>
+        );
+      } else {
+        userActionBtn = (
+          <>
+            <button
+              className="adopt-btn"
+              onClick={() => {
+                handleAdopt();
+              }}
+            >
+              adopt now
+            </button>
+            <button
+              className="adopt-btn"
+              onClick={() => {
+                handleFoster();
+              }}
+            >
+              foster now
+            </button>
+          </>
+        );
+      }
     }
   }
 
@@ -123,13 +185,7 @@ function PetPage(props) {
   }
 
   return (
-    <div className="main-container">
-      <span className="back-btn">
-        <FontAwesomeIcon icon={faAngleLeft} />
-        <p>back</p>
-      </span>
-      {loading || mainDetailsContainer}
-    </div>
+    <div className="main-container">{loading || mainDetailsContainer}</div>
   );
 }
 

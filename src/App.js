@@ -13,6 +13,8 @@ import Modal from "react-modal";
 import ServerContext from "./contexts/ServerContext";
 import AuthContext from "./contexts/AuthContext";
 import { useEffect, useState } from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AllPets from "./components/AllPets";
@@ -116,6 +118,11 @@ function App() {
                 handleLogOut();
               }}
             />
+            {/* below is for a a future update - show back button on every page other than welcome page */}
+            {/* <span className="back-btn">
+              <FontAwesomeIcon icon={faAngleLeft} />
+              <p>back</p>
+            </span> */}
             <SignUpModal
               isOpen={modalIsOpen}
               onCloseModal={handleCloseModal}
