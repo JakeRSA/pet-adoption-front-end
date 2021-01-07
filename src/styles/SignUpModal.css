@@ -74,6 +74,11 @@
   width: 16em;
 }
 
+.sign-up-form .react-tel-input input {
+  height: 26px;
+  width: 14em;
+}
+
 .sign-up-form #phone {
   width: 8em;
 }

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
 import Modal from "react-modal";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import ServerContext from "../contexts/ServerContext";

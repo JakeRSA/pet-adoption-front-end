@@ -26,7 +26,7 @@ function App() {
   const [isNewUser, setIsNewUser] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [authConfig, setauthConfig] = useState({
+  const [authConfig, setAuthConfig] = useState({
     headers: {
       user_email: JSON.parse(localStorage.getItem("user_email")),
       authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
@@ -47,47 +47,6 @@ function App() {
 
   const handleCloseModal = () => {
     setModalIsOpen(false);
-  };
-
-  const handleSignUpSubmit = (formValues) => {
-    axios
-      .post(baseServerUrl + "/signup", formValues, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        localStorage.setItem("user_email", JSON.stringify(res.data.user));
-        localStorage.setItem("token", JSON.stringify(res.data.accessToken));
-        setauthConfig({
-          headers: {
-            authorization: "Bearer " + res.data.accessToken,
-            user_email: res.data.user,
-          },
-        });
-        setModalIsOpen(false);
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
-  };
-
-  const handleSignInSubmit = (formValues) => {
-    axios
-      .post(baseServerUrl + "/login", formValues, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) => {
-        localStorage.setItem("user_email", JSON.stringify(res.data.user));
-        localStorage.setItem("token", JSON.stringify(res.data.accessToken));
-        setauthConfig({
-          headers: {
-            authorization: "Bearer " + res.data.accessToken,
-            user_email: res.data.user,
-          },
-        });
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
   };
 
   const getCurrentUserData = (config) => {
@@ -120,11 +79,8 @@ function App() {
               isOpen={modalIsOpen}
               onCloseModal={handleCloseModal}
               isNewUser={isNewUser}
-              onSignUp={(values) => {
-                handleSignUpSubmit(values);
-              }}
-              onSignIn={(values) => {
-                handleSignInSubmit(values);
+              setAuthConfig={(config) => {
+                setAuthConfig(config);
               }}
             />
             <Switch>
@@ -140,12 +96,6 @@ function App() {
                   <HomePage
                     onOpenModal={(formType) => {
                       handleOpenModal(formType);
-                    }}
-                    handleSignUpSubmit={(values) => {
-                      handleSignUpSubmit(values);
-                    }}
-                    handleSignInSubmit={(values) => {
-                      handleSignInSubmit(values);
                     }}
                   />
                 )}

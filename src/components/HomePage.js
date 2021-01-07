@@ -1,14 +1,11 @@
 import React from "react";
 import "../styles/HomePage.css";
 import banner from "../banner.jpg";
-import { useState } from "react";
 
 function HomePage(props) {
-
   const onClickOpenModal = (formType) => {
-    props.onOpenModal(formType)
-  }
-
+    props.onOpenModal(formType);
+  };
 
   return (
     <div className="center">
