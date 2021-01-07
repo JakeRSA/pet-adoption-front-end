@@ -110,4 +110,60 @@
   border: 2px double black;
   background-color: #fdfdfd;
 }
+
+.change-password-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.change-password-form fieldset {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  border: none;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.change-password-form .submit-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.change-password-form label {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-right: 10px;
+}
+
+.change-password-form .submit {
+  font-size: 1.1em;
+  font-weight: 500;
+  width: 4em;
+  border: 2px groove black;
+  outline: none;
+  background: none;
+}
+
+.change-password-form .submit:hover {
+  cursor: pointer;
+}
+
+.change-password-form .submit:active {
+  font-weight: 600;
+  border: 2px double black;
+  background-color: #fdfdfd;
+}
 /*# sourceMappingURL=SignUpModal.css.map */

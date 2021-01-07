@@ -75,3 +75,38 @@
     }
   }
 }
+
+.change-password-form {
+  display: flex;
+  flex-direction: column;
+  fieldset {
+    display: flex;
+    margin-bottom: 10px;
+    border: none;
+    justify-content: space-between;
+  }
+  .submit-container {
+    display: flex;
+    justify-content: center;
+  }
+  label {
+    width:fit-content;
+    margin-right: 10px;
+  }
+  .submit {
+    font-size: 1.1em;
+    font-weight: 500;
+    width: 4em;
+    border: 2px groove black;
+    outline: none;
+    background: none;
+    &:hover {
+      cursor: pointer;
+    }
+    &:active {
+      font-weight: 600;
+      border: 2px double black;
+      background-color: rgb(253, 253, 253);
+    }
+  }
+}

@@ -6,6 +6,7 @@ import AuthContext from "../contexts/AuthContext";
 import ServerContext from "../contexts/ServerContext";
 import "../styles/ProfilePage.css";
 import axios from "axios";
+import ChangePasswordModal from "./ChangePasswordModal";
 
 function ProfilePage(props) {
   const authConfig = useContext(AuthContext);
@@ -13,6 +14,7 @@ function ProfilePage(props) {
   const [canEdit, setCanEdit] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(true);
 
   useEffect(() => {
     let mounted = true;
@@ -27,8 +29,20 @@ function ProfilePage(props) {
     };
   }, []);
 
+  const handleCloseModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div>
+      <ChangePasswordModal
+        isOpen={modalIsOpen}
+        onCloseModal={() => {
+          handleCloseModal();
+        }}
+        id={user._id}
+      />
+
       <section className="main-section">
         <h1>My Profile</h1>
         <Formik
@@ -117,7 +131,13 @@ function ProfilePage(props) {
                     Edit profile
                   </button>
                 )}
-                <button>Change password</button>
+                <button
+                  onClick={() => {
+                    setModalIsOpen(true);
+                  }}
+                >
+                  Change password
+                </button>
               </span>
             </Form>
           )}
