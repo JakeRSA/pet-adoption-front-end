@@ -122,11 +122,7 @@ function App() {
                 <MyPets savedOrOwned="saved" />
               </Route>
               <Route path="/profile">
-                <ProfilePage
-                  currentUser={currentUser}
-                  baseServerUrl={baseServerUrl}
-                  authConfig={authConfig}
-                />
+                <ProfilePage />
               </Route>
               <Route path="/pet/:id">
                 <PetPage />

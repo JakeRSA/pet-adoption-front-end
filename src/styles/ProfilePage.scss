@@ -1,11 +1,13 @@
-form {
+.edit-profile-form {
   display: flex;
   flex-direction: column;
   align-items: space-between;
   fieldset {
+    position: relative;
     display: flex;
     border: none;
     margin-bottom: 14px;
+    width: fit-content;
   }
 
   label {
