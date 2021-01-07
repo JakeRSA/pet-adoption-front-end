@@ -4,6 +4,29 @@ html * {
   font-family: "Poppins", sans-serif;
 }
 
+.invalid-field {
+  background-color: rgb(248, 232, 232);
+  border-radius: 2px;
+  outline: none;
+  box-shadow: 0 0 8px 2px inset rgb(206, 94, 94);
+  border: 2px solid rgb(158, 5, 5);
+}
+
+.invalid-tooltip {
+  position: absolute;
+  right: 10px;
+  transform: translateY(-100%);
+  height: fit-content;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+  background: rgb(80, 0, 0);
+  opacity: 40%;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 3px;
+}
+
 .submit {
   font-size: 1.1em;
   font-weight: 500;

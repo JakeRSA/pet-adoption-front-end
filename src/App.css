@@ -3,6 +3,33 @@ html * {
   font-family: "Poppins", sans-serif;
 }
 
+.invalid-field {
+  background-color: #f8e8e8;
+  border-radius: 2px;
+  outline: none;
+  -webkit-box-shadow: 0 0 8px 2px inset #ce5e5e;
+          box-shadow: 0 0 8px 2px inset #ce5e5e;
+  border: 2px solid #9e0505;
+}
+
+.invalid-tooltip {
+  position: absolute;
+  right: 10px;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  font-size: 0.8em;
+  margin: 0;
+  padding: 0;
+  background: #500000;
+  opacity: 40%;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 3px;
+}
+
 .submit {
   font-size: 1.1em;
   font-weight: 500;

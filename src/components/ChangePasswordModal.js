@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
 import Modal from "react-modal";
-import { useFormik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import axios from "axios";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
@@ -10,20 +11,18 @@ import AuthContext from "../contexts/AuthContext";
 function ChangePasswordModal(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
-  const formik = useFormik({
-    initialValues: {
-      oldPassword: "",
-      newPassword: "",
-      newPasswordConfirm: "",
-    },
-    onSubmit: (values) => {
-      axios
-        .put(baseServerUrl + `/user/${props.id}/password`, values, authConfig)
-        .then(console.log("done"))
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+
+  const validationSchema = Yup.object().shape({
+    oldPassword: Yup.string().required("Please enter your current password"),
+    newPassword: Yup.string()
+      .required("Please enter your new password")
+      .matches(
+        "^(?=.*?\\d.*\\d)[a-zA-Z0-9]{6,}$",
+        "Password must be longer than 6 characters and include a combination of letters and at least 2 digits"
+      ),
+    newPasswordConfirm: Yup.string()
+      .required("Please confirm your new password")
+      .oneOf([Yup.ref("newPassword"), null], "Passwords do not match"),
   });
 
   return (
@@ -43,43 +42,75 @@ function ChangePasswordModal(props) {
           ></input>
         </div>
         <h1 className="sign-up-header">Change Password</h1>
-        <form className="change-password-form" onSubmit={formik.handleSubmit}>
-          <fieldset>
-            <label for="oldPassword">Old password</label>
-            <input
-              type="password"
-              id="oldPassword"
-              name="oldPassword"
-              onChange={formik.handleChange}
-              value={formik.values.oldPassword}
-            />
-          </fieldset>
-          <fieldset>
-            <label for="newPassword">New password</label>
-            <input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              onChange={formik.handleChange}
-              value={formik.values.newPassword}
-            />
-          </fieldset>
-          <fieldset>
-            <label for="newPasswordConfirm">Confirm new password</label>
-            <input
-              type="password"
-              id="newPasswordConfirm"
-              name="newPasswordConfirm"
-              onChange={formik.handleChange}
-              value={formik.values.newPasswordConfirm}
-            />
-          </fieldset>
-          <div className="submit-container">
-            <button className="submit" type="submit">
-              submit
-            </button>
-          </div>
-        </form>
+        <Formik
+          initialValues={{
+            oldPassword: "",
+            newPassword: "",
+            newPasswordConfirm: "",
+          }}
+          onSubmit={(values, actions) => {
+            axios
+              .put(
+                baseServerUrl + `/user/${props.id}/password`,
+                values,
+                authConfig
+              )
+              .then(console.log("done"))
+              .catch((err) => {
+                if (err.response.data.password)
+                  actions.setFieldError("oldPassword", "Incorrect password");
+              });
+          }}
+          validationSchema={validationSchema}
+        >
+          {({ errors, touched }) => (
+            <Form className="change-password-form">
+              <fieldset>
+                <label htmlFor="oldPassword">Old password</label>
+                <Field
+                  type="password"
+                  id="oldPassword"
+                  name="oldPassword"
+                  className={errors.oldPassword && "invalid-field"}
+                />
+                {errors.oldPassword && touched.oldPassword ? (
+                  <div className="invalid-tooltip">{errors.oldPassword}</div>
+                ) : null}
+              </fieldset>
+              <fieldset>
+                <label htmlFor="newPassword">New password</label>
+                <Field
+                  type="password"
+                  id="newPassword"
+                  name="newPassword"
+                  className={errors.newPassword && "invalid-field"}
+                />
+                {errors.newPassword && touched.newPassword ? (
+                  <div className="invalid-tooltip">{errors.newPassword}</div>
+                ) : null}
+              </fieldset>
+              <fieldset>
+                <label htmlFor="newPasswordConfirm">Confirm new password</label>
+                <Field
+                  type="password"
+                  id="newPasswordConfirm"
+                  name="newPasswordConfirm"
+                  className={errors.newPasswordConfirm && "invalid-field"}
+                />
+                {errors.newPasswordConfirm && touched.newPasswordConfirm ? (
+                  <div className="invalid-tooltip">
+                    {errors.newPasswordConfirm}
+                  </div>
+                ) : null}
+              </fieldset>
+              <div className="submit-container">
+                <button className="submit" type="submit">
+                  submit
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </Modal>
     </div>
   );

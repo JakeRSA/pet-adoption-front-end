@@ -122,6 +122,7 @@
 }
 
 .change-password-form fieldset {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -145,6 +146,7 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  white-space: nowrap;
   margin-right: 10px;
 }
 

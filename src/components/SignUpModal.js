@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
 import { useFormik } from "formik";
-import { useState } from "react";
 
 function SignUpModal(props) {
   const formik = useFormik({
