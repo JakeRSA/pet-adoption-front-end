@@ -30,6 +30,11 @@ html * {
   padding: 5px 3px;
 }
 
+.invalid-image-container {
+  border: 2px solid #9e0505 !important;
+  background-color: #f8e8e8;
+}
+
 .submit {
   font-size: 1.1em;
   font-weight: 500;

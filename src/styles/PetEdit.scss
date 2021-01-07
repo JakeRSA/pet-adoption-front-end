@@ -1,16 +1,40 @@
 .add-edit-animal-form {
+  width: 75%;
   span {
     padding: 0.5em 0 0.5em 0;
     border-top: 1px solid rgb(94, 94, 94);
+  }
+  fieldset {
+    position: relative;
+    border: none;
+    padding: 0;
+    display: flex;
+  }
+  .animal-bio-fieldset {
+    width: 100%;
+    .invalid-tooltip {
+      transform: translateY(0%) translateX(0%);
+    }
+  }
+  .animal-image-fieldset {
+    .invalid-tooltip {
+      transform: translateY(-100%) translateX(40%);
+    }
+  } 
+  label {
+    width: 10em;
   }
   #weight,
   #height {
     width: 3em;
     margin-right: 1em;
   }
-  label {
-    width: 10em;
+  #bio {
+    resize: none;
+    flex-grow: 1;
+    height: 8em;
   }
+
   .img-container {
     margin-left: 0;
     border-color: black;
@@ -31,5 +55,8 @@
     &:active {
       font-weight: 500;
     }
+  }
+  .invalid-tooltip {
+    transform: translateY(0%) translateX(130%);
   }
 }

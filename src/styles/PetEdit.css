@@ -1,6 +1,37 @@
+.add-edit-animal-form {
+  width: 75%;
+}
+
 .add-edit-animal-form span {
   padding: 0.5em 0 0.5em 0;
   border-top: 1px solid #5e5e5e;
+}
+
+.add-edit-animal-form fieldset {
+  position: relative;
+  border: none;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.add-edit-animal-form .animal-bio-fieldset {
+  width: 100%;
+}
+
+.add-edit-animal-form .animal-bio-fieldset .invalid-tooltip {
+  -webkit-transform: translateY(0%) translateX(0%);
+          transform: translateY(0%) translateX(0%);
+}
+
+.add-edit-animal-form .animal-image-fieldset .invalid-tooltip {
+  -webkit-transform: translateY(-100%) translateX(40%);
+          transform: translateY(-100%) translateX(40%);
+}
+
+.add-edit-animal-form label {
+  width: 10em;
 }
 
 .add-edit-animal-form #weight,
@@ -9,8 +40,12 @@
   margin-right: 1em;
 }
 
-.add-edit-animal-form label {
-  width: 10em;
+.add-edit-animal-form #bio {
+  resize: none;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  height: 8em;
 }
 
 .add-edit-animal-form .img-container {
@@ -41,5 +76,10 @@
 
 .add-edit-animal-form .submit:active {
   font-weight: 500;
+}
+
+.add-edit-animal-form .invalid-tooltip {
+  -webkit-transform: translateY(0%) translateX(130%);
+          transform: translateY(0%) translateX(130%);
 }
 /*# sourceMappingURL=PetEdit.css.map */
