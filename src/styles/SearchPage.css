@@ -44,6 +44,7 @@
 .advanced-search-form fieldset {
   margin: 0;
   padding: 0;
+  border: none;
 }
 
 .advanced-search-form label {
