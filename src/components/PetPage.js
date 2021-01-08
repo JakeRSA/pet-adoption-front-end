@@ -4,12 +4,14 @@ import AuthContext from "../contexts/AuthContext";
 import "../styles/PetPage.css";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function PetPage(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [loadingAdopt, setLoadingAdopt] = useState(false);
+  const [loadingSaved, setLoadingSaved] = useState(false);
   const [animal, setAnimal] = useState({});
   const [user, setUser] = useState([]);
   const { id } = useParams();
@@ -48,7 +50,7 @@ function PetPage(props) {
       .put(baseServerUrl + `/pet/${id}/adopt`, { type: "adopt" }, authConfig)
       .then((res) => {
         setLoadingAdopt(false);
-        console.log(res.data);
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +63,7 @@ function PetPage(props) {
       .put(baseServerUrl + `/pet/${id}/adopt`, { type: "foster" }, authConfig)
       .then(() => {
         setLoadingAdopt(false);
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -73,6 +76,20 @@ function PetPage(props) {
       .put(baseServerUrl + `/pet/${id}/return`, {}, authConfig)
       .then(() => {
         setLoadingAdopt(false);
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleSavePet = () => {
+    setLoadingSaved(true);
+    axios
+      .put(baseServerUrl + `/pet/${id}/save`, {}, authConfig)
+      .then(() => {
+        setLoadingSaved(false);
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -142,7 +159,7 @@ function PetPage(props) {
                 animal.breed.slice(0, 1).toUpperCase() +
                 animal.breed.slice(1, animal.breed.length)
               }`}</h1>
-              {userActionBtn}
+              {loadingAdopt ? <Spinner /> : userActionBtn}
             </span>
             <span className="basic-info-row">
               <h4>type:</h4>
@@ -179,13 +196,26 @@ function PetPage(props) {
             <p>{animal.diet ? animal.diet : "none"}</p>
           </span>
         </div>
-        <button className="bookmark-btn">add to saved list</button>
+        {loadingSaved ? (
+          <Spinner />
+        ) : (
+          <button
+            className="bookmark-btn"
+            onClick={() => {
+              handleSavePet();
+            }}
+          >
+            add to saved list
+          </button>
+        )}
       </div>
     );
   }
 
   return (
-    <div className="main-container">{loading || mainDetailsContainer}</div>
+    <div className="main-container">
+      {loading ? <Spinner /> : mainDetailsContainer}
+    </div>
   );
 }
 

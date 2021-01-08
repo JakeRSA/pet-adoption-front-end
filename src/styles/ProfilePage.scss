@@ -26,6 +26,8 @@
 }
 
 .do-stuff-btns {
+  display: flex;
+  justify-content: center;
   button {
     margin: 6px;
     width: 12em;

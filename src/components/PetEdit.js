@@ -6,6 +6,7 @@ import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
+import Spinner from "./Spinner";
 
 function PetEdit() {
   const baseServerUrl = useContext(ServerContext);
@@ -101,7 +102,7 @@ function PetEdit() {
     <div className="main-container">
       <h1>{id ? "Edit Animal" : "Add New Animal"}</h1>
       {loading ? (
-        <h4>loading</h4>
+        <Spinner />
       ) : (
         <Formik
           initialValues={animal}
@@ -345,7 +346,9 @@ function PetEdit() {
                 </fieldset>
               </span>
               <span className="submit-span">
-                {id ? (
+                {loadingUpdate ? (
+                  <Spinner />
+                ) : id ? (
                   <input
                     className="submit"
                     type="submit"

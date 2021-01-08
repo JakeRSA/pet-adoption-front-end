@@ -37,6 +37,15 @@
   border: none;
 }
 
+.do-stuff-btns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .do-stuff-btns button {
   margin: 6px;
   width: 12em;

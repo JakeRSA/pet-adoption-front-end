@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
@@ -8,23 +8,30 @@ import * as Yup from "yup";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ServerContext from "../contexts/ServerContext";
+import Spinner from "./Spinner";
 
 function SignUpModal(props) {
   const baseServerUrl = useContext(ServerContext);
   const isNewUser = props.isNewUser;
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const PhoneComponent = (props) => <PhoneInput country="AF" {...props} />;
 
   const handleSignUpSubmit = (formValues, actions) => {
+    setLoadingSubmit(true);
     axios
       .post(baseServerUrl + "/signup", formValues, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
-        handleSignInSubmit({
-          email: formValues.email,
-          password: formValues.password,
-        });
+        handleSignInSubmit(
+          {
+            email: formValues.email,
+            password: formValues.password,
+          },
+          actions
+        );
+        setLoadingSubmit(false);
       })
       .catch((e) => {
         if (e.response.data.email) {
@@ -33,10 +40,12 @@ function SignUpModal(props) {
             "There is already an account registered under this email address"
           );
         }
+        setLoadingSubmit(false);
       });
   };
 
   const handleSignInSubmit = (formValues, actions) => {
+    setLoadingSubmit(true);
     axios
       .post(baseServerUrl + "/login", formValues, {
         headers: { "Content-Type": "application/json" },
@@ -50,6 +59,7 @@ function SignUpModal(props) {
             user_email: res.data.user,
           },
         });
+        setLoadingSubmit(false);
       })
       .catch((e) => {
         if (e.response.data.email) {
@@ -60,6 +70,7 @@ function SignUpModal(props) {
         } else if (e.response.data.password) {
           actions.setFieldError("password", "Incorrect password");
         }
+        setLoadingSubmit(false);
       });
   };
   const signUpValidationSchema = Yup.object().shape({
@@ -228,9 +239,13 @@ function SignUpModal(props) {
               </fieldset>
             )}
             <div className="submit-container">
-              <button className="submit" type="submit">
-                {isNewUser ? "JOIN" : "LOGIN"}
-              </button>
+              {loadingSubmit ? (
+                <Spinner />
+              ) : (
+                <button className="submit" type="submit">
+                  {isNewUser ? "JOIN" : "LOGIN"}
+                </button>
+              )}
             </div>
           </Form>
         )}

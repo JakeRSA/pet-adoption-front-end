@@ -5,6 +5,7 @@ import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
 import PetCardList from "./PetCardList";
 import "../styles/ViewUser.css";
+import Spinner from "./Spinner";
 
 function ViewUser() {
   const { id } = useParams();
@@ -32,7 +33,9 @@ function ViewUser() {
   }, []);
 
   let userDetails = <></>;
-  if (!profileLoading) {
+  if (profileLoading) {
+    userDetails = <Spinner />;
+  } else {
     userDetails = (
       <div className="view-user-details">
         <span className="contact-info">
@@ -52,9 +55,11 @@ function ViewUser() {
             <p>user.bio</p>
           </span>
         )}
-        {petsLoading || (
+        <h2 className="sub-heading">{user.firstName}'s Pets</h2>
+        {petsLoading ? (
+          <Spinner />
+        ) : (
           <>
-            <h2 className="sub-heading">{user.firstName}'s Pets</h2>
             {pets.length > 0 ? (
               <PetCardList pets={pets} />
             ) : (

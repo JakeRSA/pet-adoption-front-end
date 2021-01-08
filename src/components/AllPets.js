@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ServerContext from "../contexts/ServerContext";
 import axios from "axios";
 import PetCardList from "./PetCardList";
+import Spinner from "./Spinner";
 
 function AllPets() {
   const baseServerUrl = useContext(ServerContext);
@@ -24,7 +25,7 @@ function AllPets() {
   return (
     <div className="main-container">
       <h1>Manage Pets</h1>
-      {loading || <PetCardList addNew={true} pets={pets} />}
+      {loading ? <Spinner /> : <PetCardList addNew={true} pets={pets} />}
     </div>
   );
 }

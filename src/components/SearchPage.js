@@ -8,6 +8,7 @@ import SearchBar from "./SearchBar";
 import "../styles/SearchPage.css";
 import PetCardList from "./PetCardList";
 import { useLocation } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function SearchPage() {
   let queryString = useLocation().search;
@@ -197,6 +198,8 @@ function SearchPage() {
       <h1>{isAdvanced ? "Advanced Search" : "Basic Search"}</h1>
       {isAdvanced ? advancedSearch : basicSearch}
       {toggle}
+      {loading && <Spinner />}
+
       {!loading && results.length > 0 ? (
         <PetCardList pets={results} />
       ) : (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "../styles/SignUpModal.css";
 import closeIcon from "../close.png";
 import Modal from "react-modal";
@@ -7,10 +7,12 @@ import * as Yup from "yup";
 import axios from "axios";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
+import Spinner from "./Spinner";
 
 function ChangePasswordModal(props) {
   const baseServerUrl = useContext(ServerContext);
   const authConfig = useContext(AuthContext);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const validationSchema = Yup.object().shape({
     oldPassword: Yup.string().required("Please enter your current password"),
@@ -49,16 +51,20 @@ function ChangePasswordModal(props) {
             newPasswordConfirm: "",
           }}
           onSubmit={(values, actions) => {
+            setLoadingSubmit(true);
             axios
               .put(
                 baseServerUrl + `/user/${props.id}/password`,
                 values,
                 authConfig
               )
-              .then(console.log("done"))
+              .then(() => {
+                setLoadingSubmit(false);
+              })
               .catch((err) => {
                 if (err.response.data.password)
                   actions.setFieldError("oldPassword", "Incorrect password");
+                setLoadingSubmit(false);
               });
           }}
           validationSchema={validationSchema}
@@ -71,7 +77,9 @@ function ChangePasswordModal(props) {
                   type="password"
                   id="oldPassword"
                   name="oldPassword"
-                  className={errors.oldPassword && "invalid-field"}
+                  className={
+                    errors.oldPassword && touched.oldPassword && "invalid-field"
+                  }
                 />
                 {errors.oldPassword && touched.oldPassword ? (
                   <div className="invalid-tooltip">{errors.oldPassword}</div>
@@ -83,7 +91,9 @@ function ChangePasswordModal(props) {
                   type="password"
                   id="newPassword"
                   name="newPassword"
-                  className={errors.newPassword && "invalid-field"}
+                  className={
+                    errors.newPassword && touched.newPassword && "invalid-field"
+                  }
                 />
                 {errors.newPassword && touched.newPassword ? (
                   <div className="invalid-tooltip">{errors.newPassword}</div>
@@ -95,7 +105,11 @@ function ChangePasswordModal(props) {
                   type="password"
                   id="newPasswordConfirm"
                   name="newPasswordConfirm"
-                  className={errors.newPasswordConfirm && "invalid-field"}
+                  className={
+                    errors.newPasswordConfirm &&
+                    touched.newPasswordConfirm &&
+                    "invalid-field"
+                  }
                 />
                 {errors.newPasswordConfirm && touched.newPasswordConfirm ? (
                   <div className="invalid-tooltip">
@@ -104,9 +118,13 @@ function ChangePasswordModal(props) {
                 ) : null}
               </fieldset>
               <div className="submit-container">
-                <button className="submit" type="submit">
-                  submit
-                </button>
+                {loadingSubmit ? (
+                  <Spinner />
+                ) : (
+                  <button className="submit" type="submit">
+                    submit
+                  </button>
+                )}
               </div>
             </Form>
           )}

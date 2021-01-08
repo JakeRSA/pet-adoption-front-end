@@ -9,12 +9,14 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import ChangePasswordModal from "./ChangePasswordModal";
+import Spinner from "./Spinner";
 
 function ProfilePage(props) {
   const authConfig = useContext(AuthContext);
   const baseServerUrl = useContext(ServerContext);
   const [canEdit, setCanEdit] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [user, setUser] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -56,6 +58,38 @@ function ProfilePage(props) {
       ),
   });
 
+  const buttons = (
+    <>
+      {canEdit ? (
+        <>
+          <button type="submit">Save changes</button>
+          <button
+            onClick={() => {
+              cancelChanges(props);
+            }}
+          >
+            Cancel changes
+          </button>
+        </>
+      ) : (
+        <button
+          onClick={() => {
+            setCanEdit(true);
+          }}
+        >
+          Edit profile
+        </button>
+      )}
+      <button
+        onClick={() => {
+          setModalIsOpen(true);
+        }}
+      >
+        Change password
+      </button>
+    </>
+  );
+
   return (
     <div>
       <ChangePasswordModal
@@ -72,20 +106,26 @@ function ProfilePage(props) {
           initialValues={user}
           enableReinitialize={true}
           onSubmit={(values, actions) => {
+            setLoadingSubmit(true);
             axios
               .put(baseServerUrl + "/user/" + user._id, values, authConfig)
-              .then(setCanEdit(false))
+              .then(() => {
+                setLoadingSubmit(false);
+                setCanEdit(false);
+              })
               .catch((err) => {
                 if (err.response.data.email) {
                   actions.setFieldError("email", err.response.data.email);
-                  actions.resetForm();
                 }
+                setLoadingSubmit(false);
               });
           }}
           validationSchema={validationSchema}
         >
-          {!loading &&
-            ((props) => (
+          {loading ? (
+            <Spinner />
+          ) : (
+            (props) => (
               <Form className="edit-profile-form">
                 <fieldset>
                   <label htmlFor="firstName">First name</label>
@@ -177,36 +217,11 @@ function ProfilePage(props) {
                 </fieldset>
 
                 <span className="do-stuff-btns">
-                  {canEdit ? (
-                    <>
-                      <button type="submit">Save changes</button>
-                      <button
-                        onClick={() => {
-                          cancelChanges(props);
-                        }}
-                      >
-                        Cancel changes
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setCanEdit(true);
-                      }}
-                    >
-                      Edit profile
-                    </button>
-                  )}
-                  <button
-                    onClick={() => {
-                      setModalIsOpen(true);
-                    }}
-                  >
-                    Change password
-                  </button>
+                  {loadingSubmit ? <Spinner /> : buttons}
                 </span>
               </Form>
-            ))}
+            )
+          )}
         </Formik>
       </section>
     </div>

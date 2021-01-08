@@ -3,6 +3,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ServerContext from "../contexts/ServerContext";
 import AuthContext from "../contexts/AuthContext";
 import PetCardList from "./PetCardList";
+import Spinner from "./Spinner";
 
 function MyPets(props) {
   const baseServerUrl = useContext(ServerContext);
@@ -58,7 +59,7 @@ function MyPets(props) {
   return (
     <div className="main-container">
       <h1>{props.savedOrOwned === "owned" ? "My Pets" : "Saved Pets"}</h1>
-      {emptyPets}
+      {loading ? <Spinner /> : emptyPets}
       <PetCardList pets={petList} />
     </div>
   );

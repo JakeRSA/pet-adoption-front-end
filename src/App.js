@@ -17,7 +17,6 @@ import axios from "axios";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AllPets from "./components/AllPets";
 import ViewUser from "./components/ViewUser";
-import Spinner from "./components/Spinner";
 
 Modal.setAppElement("#root");
 

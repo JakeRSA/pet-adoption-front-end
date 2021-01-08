@@ -4,6 +4,7 @@ import AuthContext from "../contexts/AuthContext";
 import ServerContext from "../contexts/ServerContext";
 import "../styles/ManageUsers.css";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function ManageUsers() {
   const baseServerUrl = useContext(ServerContext);
@@ -44,7 +45,7 @@ function ManageUsers() {
   return (
     <div className="main-container">
       <h1>Manage Users</h1>
-      {loading || (
+      {loading ? <Spinner /> : (
         <ul className="user-list">
           <li className="list-headers">
             <span>
