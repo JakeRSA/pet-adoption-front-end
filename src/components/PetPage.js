@@ -96,6 +96,19 @@ function PetPage(props) {
       });
   };
 
+  const handleRemovePet = () => {
+    setLoadingSaved(true);
+    axios
+      .delete(baseServerUrl + `/pet/${id}/save`, authConfig)
+      .then(() => {
+        setLoadingSaved(false);
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   /* determine what actions the user can take based on their user type and relationship to the pet */
   let userActionBtn;
   if (!loading) {
@@ -201,11 +214,19 @@ function PetPage(props) {
         ) : (
           <button
             className="bookmark-btn"
-            onClick={() => {
-              handleSavePet();
-            }}
+            onClick={
+              user.savedPetIds && user.savedPetIds.includes(id)
+                ? () => {
+                    handleRemovePet();
+                  }
+                : () => {
+                    handleSavePet();
+                  }
+            }
           >
-            add to saved list
+            {user.savedPetIds && user.savedPetIds.includes(id)
+              ? "remove from saved pets"
+              : "add to saved pets"}
           </button>
         )}
       </div>
