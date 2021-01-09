@@ -4,7 +4,8 @@ html * {
   font-family: "Poppins", sans-serif;
 }
 
-input, textarea,
+input,
+textarea,
 .form-control {
   border: 1px solid black !important;
   border-radius: 2px !important;
@@ -39,7 +40,7 @@ input, textarea,
 }
 
 .button-2 {
-  border:2px solid black;
+  border: 2px solid black;
   margin-left: 0.5em;
   padding: 4px;
   margin-right: 5px;
@@ -128,7 +129,7 @@ input, textarea,
 
 .invalid-submit {
   border: 2px solid rgb(138, 0, 0) !important;
-  background-color:rgb(255, 206, 206) !important;
+  background-color: rgb(255, 206, 206) !important;
   color: rgb(138, 0, 0);
 }
 

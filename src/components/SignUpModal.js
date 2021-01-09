@@ -24,14 +24,15 @@ function SignUpModal(props) {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
-        handleSignInSubmit(
-          {
-            email: formValues.email,
-            password: formValues.password,
-          },
-          actions
-        );
-        setLoadingSubmit(false);
+        setTimeout(() => {
+          handleSignInSubmit(
+            {
+              email: formValues.email,
+              password: formValues.password,
+            },
+            actions
+          );
+        }, 3000);
       })
       .catch((e) => {
         if (e.response.data.email) {

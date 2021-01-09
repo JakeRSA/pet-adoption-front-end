@@ -34,6 +34,10 @@ function App() {
   });
 
   useEffect(() => {
+    document.title = "Le Compagnon"
+  }, [])
+
+  useEffect(() => {
     getCurrentUserData(authConfig);
     setModalIsOpen(false);
   }, [authConfig]);

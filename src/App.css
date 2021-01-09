@@ -3,7 +3,8 @@ html * {
   font-family: "Poppins", sans-serif;
 }
 
-input, textarea,
+input,
+textarea,
 .form-control {
   border: 1px solid black !important;
   border-radius: 2px !important;
