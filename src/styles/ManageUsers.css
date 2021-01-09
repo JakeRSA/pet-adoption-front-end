@@ -24,15 +24,15 @@
 
 .user-list .list-headers {
   font-weight: 600;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  background-color: white;
+  background-color: black;
+  color: white;
 }
 
 .user-list .item {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: #f5f3e9;
+  border-bottom: 2px solid black;
 }
 
 .user-list .item span p {
@@ -40,14 +40,14 @@
 }
 
 .user-list .item:nth-child(odd) {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.952);
 }
 
 .user-list .item:hover {
   cursor: pointer;
-  background-color: #f2ffff;
-  -webkit-box-shadow: 0 0 8px 2px #d9f6ff inset;
-          box-shadow: 0 0 8px 2px #d9f6ff inset;
+  background-color: #fff8f2;
+  -webkit-box-shadow: 0 0 8px 2px #ffaf81 inset;
+          box-shadow: 0 0 8px 2px #ffaf81 inset;
 }
 
 .user-list .item:hover span p {

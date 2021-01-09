@@ -39,11 +39,6 @@ function ProfilePage(props) {
     setModalIsOpen(false);
   };
 
-  const cancelChanges = (props) => {
-    props.resetForm();
-    setCanEdit(false);
-  };
-
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
@@ -57,38 +52,6 @@ function ProfilePage(props) {
         "Please enter a valid email address"
       ),
   });
-
-  const buttons = (
-    <>
-      {canEdit ? (
-        <>
-          <button type="submit">Save changes</button>
-          <button
-            onClick={() => {
-              cancelChanges(props);
-            }}
-          >
-            Cancel changes
-          </button>
-        </>
-      ) : (
-        <button
-          onClick={() => {
-            setCanEdit(true);
-          }}
-        >
-          Edit profile
-        </button>
-      )}
-      <button
-        onClick={() => {
-          setModalIsOpen(true);
-        }}
-      >
-        Change password
-      </button>
-    </>
-  );
 
   return (
     <div>
@@ -217,7 +180,45 @@ function ProfilePage(props) {
                 </fieldset>
 
                 <span className="do-stuff-btns">
-                  {loadingSubmit ? <Spinner /> : buttons}
+                  {loadingSubmit ? (
+                    <Spinner />
+                  ) : (
+                    <>
+                      {canEdit ? (
+                        <>
+                          <button className="button-1" type="submit">
+                            Save changes
+                          </button>
+                          <button
+                            className="button-1"
+                            onClick={() => {
+                              props.resetForm();
+                              setCanEdit(false);
+                            }}
+                          >
+                            Cancel changes
+                          </button>
+                        </>
+                      ) : (
+                        <button
+                          className="button-1"
+                          onClick={() => {
+                            setCanEdit(true);
+                          }}
+                        >
+                          Edit profile
+                        </button>
+                      )}
+                      <button
+                        className="button-1"
+                        onClick={() => {
+                          setModalIsOpen(true);
+                        }}
+                      >
+                        Change password
+                      </button>
+                    </>
+                  )}
                 </span>
               </Form>
             )

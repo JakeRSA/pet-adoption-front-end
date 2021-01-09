@@ -68,6 +68,7 @@
 }
 
 .animal-basic-container {
+  height: 250px;
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -92,53 +93,20 @@
   margin: 0;
 }
 
-.img-container {
+.pet-details-img-container {
   height: 250px;
   width: 250px;
   -ms-flex-negative: 0;
       flex-shrink: 0;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.img-container img {
-  max-height: 255px;
-  max-width: 255px;
-}
-
-.adopt-btn,
-.bookmark-btn {
-  margin-left: 0.5em;
   margin-right: 5px;
-  background-color: none;
-  font-size: 1.2em;
-  font-weight: 500;
-  text-decoration: underline;
-}
-
-.adopt-btn:hover,
-.bookmark-btn:hover {
-  cursor: pointer;
-  font-weight: 600;
-  background-color: black;
-  color: white;
-}
-
-.adopt-btn:active,
-.bookmark-btn:active {
-  font-weight: 700;
-}
-
-.adopt-btn {
-  border: 2px outset black;
-  padding: 10px 6px 10px 6px;
 }
 
 .bookmark-btn {
-  background: none;
-  border: none;
-  outline: none;
-  margin-bottom: 20px;
+  color: black;
+}
+
+.bookmark-btn:hover {
+  color: white;
 }
 
 .more-details-container {

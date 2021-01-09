@@ -3,7 +3,6 @@ import axios from "axios";
 import { useState, useContext } from "react";
 import ServerContext from "../contexts/ServerContext";
 import { Formik, Form, Field } from "formik";
-import * as Yup from "yup";
 import SearchBar from "./SearchBar";
 import "../styles/SearchPage.css";
 import PetCardList from "./PetCardList";
@@ -142,7 +141,7 @@ function SearchPage() {
                   numberInputOnly(e, props);
                 }}
               />
-              <p>cm</p>
+              <p className="bold">cm</p>
               <label htmlFor="maxHeight">to</label>
               <Field
                 className="num"
@@ -151,7 +150,7 @@ function SearchPage() {
                 type="number"
                 min={0}
               />
-              <p>cm</p>
+              <p className="bold">cm</p>
             </fieldset>
           </span>
           <span>
@@ -167,7 +166,7 @@ function SearchPage() {
                 type="number"
                 min={0}
               />
-              <p>kg</p>
+              <p className="bold">kg</p>
               <label htmlFor="maxWeight">to</label>
               <Field
                 className="num"
@@ -176,7 +175,7 @@ function SearchPage() {
                 type="number"
                 min={0}
               />
-              <p>kg</p>
+              <p className="bold">kg</p>
             </fieldset>
           </span>
           <span>
@@ -188,7 +187,11 @@ function SearchPage() {
               {animalTypeOptions}
             </Field>
           </span>
-          <button type="submit" className="submit" value="search" />
+          <span className="flex-justify-center">
+            <button type="submit" className="button-1">
+              search
+            </button>
+          </span>
         </Form>
       )}
     </Formik>
@@ -203,7 +206,7 @@ function SearchPage() {
       {!loading && results.length > 0 ? (
         <PetCardList pets={results} />
       ) : (
-        hasSearched && (
+        (hasSearched && !loading) && (
           <h4 className="no-results">your search returned 0 results</h4>
         )
       )}

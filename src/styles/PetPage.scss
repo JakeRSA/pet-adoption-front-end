@@ -47,6 +47,7 @@ $main-color: rgba(41, 0, 0, 0.123);
 }
 
 .animal-basic-container {
+  height: 250px;
   flex-grow: 1;
   overflow-y: scroll;
 }
@@ -62,47 +63,18 @@ $main-color: rgba(41, 0, 0, 0.123);
   }
 }
 
-.img-container {
+.pet-details-img-container {
   height: 250px;
   width: 250px;
   flex-shrink: 0;
-  border-radius: 6px;
-  overflow: hidden;
-  img {
-    max-height: 255px;
-    max-width: 255px;
-  }
+  margin-right: 5px;
 }
 
-.adopt-btn,
 .bookmark-btn {
-  margin-left: 0.5em;
-  margin-right: 5px;
-  background-color: none;
-  font-size: 1.2em;
-  font-weight: 500;
-  text-decoration: underline;
+  color: black;
   &:hover {
-    cursor: pointer;
-    font-weight: 600;
-    background-color: black;
     color: white;
   }
-  &:active {
-    font-weight: 700;
-  }
-}
-
-.adopt-btn {
-  border: 2px outset black;
-  padding: 10px 6px 10px 6px;
-}
-
-.bookmark-btn {
-  background: none;
-  border: none;
-  outline: none;
-  margin-bottom: 20px;
 }
 
 .more-details-container {

@@ -16,7 +16,7 @@ function PetCard(props) {
 
   const petCard = (
     <div className="card">
-      <div className="img-container">
+      <div className="img-container pet-img-container">
         <img src={props.imageUrl} alt={props.name}></img>
       </div>
       <div className="basic-info-container">
@@ -24,14 +24,14 @@ function PetCard(props) {
         <p>{status}</p>
       </div>
       <Link className="visited" to={`/pet/${props.id}`}>
-        <button className="submit">go to details</button>
+        <button className="button-3">go to details</button>
       </Link>
     </div>
   );
 
   const newCard = (
     <div className="card add-new-pet-card">
-      <Link className="flex-link" to="/add-pet">
+      <Link className="flex-link visited" to="/add-pet">
         <div className="inner-border">
           <FontAwesomeIcon className="big-plus" icon={faPlusCircle} />
           <h3>add new pet</h3>

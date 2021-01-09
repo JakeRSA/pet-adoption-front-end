@@ -20,7 +20,7 @@
     .invalid-tooltip {
       transform: translateY(-100%) translateX(40%);
     }
-  } 
+  }
   label {
     width: 10em;
   }
@@ -34,27 +34,15 @@
     flex-grow: 1;
     height: 8em;
   }
-
-  .img-container {
-    margin-left: 0;
-    border-color: black;
-  }
   .submit-span {
     display: flex;
     justify-content: center;
   }
-  .submit {
-    color: black;
-    font-weight: 600;
-    background-color: white;
-    &:hover {
-      cursor: pointer;
-      background-color: black;
-      color: white;
-    }
-    &:active {
-      font-weight: 500;
-    }
+  .edit-animal-img-container {
+    margin-top: 5px;
+    height: 250px;
+    width: 250px;
+  }
   }
   .invalid-tooltip {
     transform: translateY(0%) translateX(130%);

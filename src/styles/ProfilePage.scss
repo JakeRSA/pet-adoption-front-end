@@ -7,7 +7,6 @@
     display: flex;
     border: none;
     margin-bottom: 14px;
-    width: fit-content;
   }
 
   label {
@@ -21,7 +20,7 @@
   }
 
   .no-edit-field {
-    border: none;
+    border: none !important;
   }
 }
 
@@ -29,18 +28,6 @@
   display: flex;
   justify-content: center;
   button {
-    margin: 6px;
-    width: 12em;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 6px;
-    font-weight: 500;
-    outline: none;
-    &:hover {
-      cursor: pointer;
-    }
-    &:active {
-      border: 1px solid black;
-    }
+    margin: 5px;
   }
 }

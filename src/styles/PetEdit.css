@@ -48,11 +48,6 @@
   height: 8em;
 }
 
-.add-edit-animal-form .img-container {
-  margin-left: 0;
-  border-color: black;
-}
-
 .add-edit-animal-form .submit-span {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -60,6 +55,12 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+.add-edit-animal-form .edit-animal-img-container {
+  margin-top: 5px;
+  height: 250px;
+  width: 250px;
 }
 
 .add-edit-animal-form .submit {

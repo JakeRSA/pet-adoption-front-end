@@ -38,6 +38,7 @@
 
 .close-btn {
   height: 1.8em;
+  border: none !important;
 }
 
 .sign-up-form {
@@ -153,24 +154,5 @@
   width: fit-content;
   white-space: nowrap;
   margin-right: 10px;
-}
-
-.change-password-form .submit {
-  font-size: 1.1em;
-  font-weight: 500;
-  width: 4em;
-  border: 2px groove black;
-  outline: none;
-  background: none;
-}
-
-.change-password-form .submit:hover {
-  cursor: pointer;
-}
-
-.change-password-form .submit:active {
-  font-weight: 600;
-  border: 2px double black;
-  background-color: #fdfdfd;
 }
 /*# sourceMappingURL=SignUpModal.css.map */

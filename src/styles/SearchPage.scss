@@ -15,8 +15,16 @@
   }
   span {
     display: flex;
+    align-items: center;
     width: 100%;
     margin: 5px;
+  }
+  #height, #weight {
+    display: flex;
+    align-items: center;
+    label {
+      width: fit-content;
+    }
   }
   span * {
     display: inline;
@@ -27,8 +35,9 @@
     border : none;
   }
   label {
-    width: fit-content;
+    width: 5em;
     margin-right: 8px;
+    flex-shrink: 0;
   }
   .bold {
     font-weight: 600;
@@ -40,9 +49,8 @@
     margin-left: 2px;
     margin-right: 8px;
   }
-  .submit {
-    margin-top: 1em;
-    width: fit-content;
+  button {
+    margin-top: 10px;
   }
 }
 

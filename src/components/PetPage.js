@@ -115,14 +115,14 @@ function PetPage(props) {
     if (user.type === "admin") {
       userActionBtn = (
         <Link to={`/edit-pet/${animal._id}`}>
-          <button className="adopt-btn">edit details</button>
+          <button className="button-1">edit details</button>
         </Link>
       );
     } else {
       if (user._id === animal.carerId) {
         userActionBtn = (
           <button
-            className="adopt-btn"
+            className="button-2"
             onClick={() => {
               handleReturnPet();
             }}
@@ -134,7 +134,7 @@ function PetPage(props) {
         userActionBtn = (
           <>
             <button
-              className="adopt-btn"
+              className="button-2"
               onClick={() => {
                 handleAdopt();
               }}
@@ -142,7 +142,7 @@ function PetPage(props) {
               adopt now
             </button>
             <button
-              className="adopt-btn"
+              className="button-2"
               onClick={() => {
                 handleFoster();
               }}
@@ -160,7 +160,7 @@ function PetPage(props) {
     mainDetailsContainer = (
       <div className="main-details-container">
         <div className="animal-summary-container">
-          <div className="img-container">
+          <div className="img-container pet-details-img-container">
             <img
               src={`${baseServerUrl}/pet_images/${animal.imageFileName}`}
               alt={animal.name}
@@ -212,8 +212,9 @@ function PetPage(props) {
         {loadingSaved ? (
           <Spinner />
         ) : (
+          ( user.type === "admin" ||
           <button
-            className="bookmark-btn"
+            className="button-3 bookmark-btn"
             onClick={
               user.savedPetIds && user.savedPetIds.includes(id)
                 ? () => {
@@ -228,7 +229,7 @@ function PetPage(props) {
               ? "remove from saved pets"
               : "add to saved pets"}
           </button>
-        )}
+        ))}
       </div>
     );
   }

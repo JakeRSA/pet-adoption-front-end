@@ -18,9 +18,6 @@
   display: flex;
   border: none;
   margin-bottom: 14px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
 .edit-profile-form label {
@@ -34,7 +31,7 @@
 }
 
 .edit-profile-form .no-edit-field {
-  border: none;
+  border: none !important;
 }
 
 .do-stuff-btns {
@@ -47,20 +44,6 @@
 }
 
 .do-stuff-btns button {
-  margin: 6px;
-  width: 12em;
-  background-color: white;
-  border: 2px solid black;
-  border-radius: 6px;
-  font-weight: 500;
-  outline: none;
-}
-
-.do-stuff-btns button:hover {
-  cursor: pointer;
-}
-
-.do-stuff-btns button:active {
-  border: 1px solid black;
+  margin: 5px;
 }
 /*# sourceMappingURL=ProfilePage.css.map */

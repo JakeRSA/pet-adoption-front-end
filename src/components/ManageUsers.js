@@ -34,7 +34,7 @@ function ManageUsers() {
           <span>
             <p>{user.firstName + " " + user.lastName}</p>
             <p>{user.email}</p>
-            <p>{user.phone}</p>
+            <p>+{user.phone}</p>
             <p>{user.type}</p>
           </span>
         </li>
@@ -45,7 +45,9 @@ function ManageUsers() {
   return (
     <div className="main-container">
       <h1>Manage Users</h1>
-      {loading ? <Spinner /> : (
+      {loading ? (
+        <Spinner />
+      ) : (
         <ul className="user-list">
           <li className="list-headers">
             <span>

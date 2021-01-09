@@ -3,13 +3,110 @@ html * {
   font-family: "Poppins", sans-serif;
 }
 
+input, textarea,
+.form-control {
+  border: 1px solid black !important;
+  border-radius: 2px !important;
+}
+
+.flex-align-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex-justify-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.button-1 {
+  font-size: 1.1em;
+  font-weight: 500;
+  border: 2px groove black;
+  outline: none;
+  background: none;
+  padding: 2px 6px 2px 6px;
+}
+
+.button-1:hover {
+  background-color: black;
+  color: #fdfdfd;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.button-1:active {
+  font-weight: 600;
+}
+
+.button-2 {
+  border: 2px solid black;
+  margin-left: 0.5em;
+  padding: 4px;
+  margin-right: 5px;
+  background-color: none;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.button-2:hover {
+  cursor: pointer;
+  font-weight: 600;
+  background-color: black;
+  color: white;
+}
+
+.button-2:active {
+  font-weight: 700;
+}
+
+.button-3 {
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  outline: none;
+  color: white;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 5px;
+  text-decoration: underline;
+}
+
+.button-3:hover {
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #111010;
+}
+
+.img-container {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.img-container img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .invalid-field {
-  background-color: #f8e8e8;
+  background-color: #e8f7f8;
   border-radius: 2px;
   outline: none;
-  -webkit-box-shadow: 0 0 8px 2px inset #ce5e5e;
-          box-shadow: 0 0 8px 2px inset #ce5e5e;
-  border: 2px solid #9e0505;
+  -webkit-box-shadow: 0 0 8px 2px inset #5ecace;
+          box-shadow: 0 0 8px 2px inset #5ecace;
+  border: 2px solid #05599e !important;
 }
 
 .invalid-tooltip {
@@ -23,16 +120,21 @@ html * {
   font-size: 0.8em;
   margin: 0;
   padding: 0;
-  background: #500000;
+  background: #010050;
   opacity: 40%;
   color: white;
   border-radius: 5px;
   padding: 5px 3px;
 }
 
-.invalid-image-container {
+.invalid-img-container {
   border: 2px solid #9e0505 !important;
   background-color: #f8e8e8;
+}
+
+.visited {
+  color: black;
+  text-decoration: none;
 }
 
 .submit {
@@ -52,5 +154,21 @@ html * {
   font-weight: 600;
   border: 2px double black;
   background-color: #fdfdfd;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #180e01;
 }
 /*# sourceMappingURL=App.css.map */

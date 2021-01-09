@@ -242,7 +242,7 @@ function SignUpModal(props) {
               {loadingSubmit ? (
                 <Spinner />
               ) : (
-                <button className="submit" type="submit">
+                <button className="button-1" type="submit">
                   {isNewUser ? "JOIN" : "LOGIN"}
                 </button>
               )}

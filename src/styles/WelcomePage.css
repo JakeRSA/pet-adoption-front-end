@@ -39,28 +39,31 @@ body {
   width: -moz-fit-content;
   width: fit-content;
   background: none;
+  font-size: 0.8em;
   text-decoration: underline;
   border: none;
   outline: none;
+  margin-left: 5px;
   margin-top: 5px;
 }
 
 .advanced-btn:hover {
   cursor: pointer;
+  font-weight: 500;
 }
 
 .nav-cards {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .card-text:visited {
-  text-decoration: none;
-}
-
-.visited {
-  color: black;
   text-decoration: none;
 }
 /*# sourceMappingURL=WelcomePage.css.map */

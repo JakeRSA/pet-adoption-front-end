@@ -325,10 +325,10 @@ function PetEdit() {
                       </div>
                     ) : null}
                     <div
-                      className={`img-container ${
+                      className={`img-container edit-animal-img-container ${
                         props.errors.imageFile &&
                         props.touched.imageFile &&
-                        "invalid-image-container"
+                        "invalid-img-container"
                       }`}
                     >
                       <img
@@ -349,17 +349,13 @@ function PetEdit() {
                 {loadingUpdate ? (
                   <Spinner />
                 ) : id ? (
-                  <input
-                    className="submit"
-                    type="submit"
-                    value="save changes"
-                  ></input>
+                  <button className="button-1" type="submit">
+                    save changes
+                  </button>
                 ) : (
-                  <input
-                    className="submit"
-                    type="submit"
-                    value="add new animal"
-                  ></input>
+                  <button className="button-1" type="submit">
+                    add new animal
+                  </button>
                 )}
               </span>
             </Form>

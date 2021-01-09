@@ -18,15 +18,21 @@
 }
 
 .nav-card:hover {
-  height: 300px;
+  text-decoration: underline;
+  color: #010046;
   cursor: pointer;
 }
 
-.icon-container {
-  height: 80%;
-  border-radius: 6px;
+.nav-card:hover .nav-icon-container {
+  border-color: #010046;
+}
+
+.nav-icon-container {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  height: 200px;
+  width: 200px;
   border: 2px solid black;
-  overflow: hidden;
 }
 
 .icon {

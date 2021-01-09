@@ -17,11 +17,12 @@ function HomePage(props) {
         ></img>
       </div>
       <p className="about-text">
-        PetCouture.com is a boutique animal shelter in the heart of Herzliya
-        Pituach. Our mission is to pair discerning animal lovers with animals
-        that appreciate the finer things in life. All our animals are locally
-        sourced and vegan friendly. They have up-to-date vaccinations and each
-        has its own signature cocktail recipe stored in its RFID chip.
+        Le Compagnon is a boutique animal shelter. Our mission is to pair
+        discerning animal lovers with animals that are accustomed to a certain
+        standard of living. All our animals are locally sourced, vegan-friendly
+        and each has its own signature cocktail. Please note that some of our
+        animals refuse to be vaccinated. Le Compagnon is a a non-profit
+        organization.
       </p>
       <span>
         <button

@@ -12,11 +12,14 @@
 .mini-tools {
   display: flex;
   align-items: center;
-  * {
+  > * {
     margin-right: 15px;
   }
 }
 
+.mini-search-btn {
+  border: none !important;
+}
 .mini-login {
   outline: none;
   border: none;

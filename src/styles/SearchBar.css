@@ -6,19 +6,21 @@
   border: 2px solid transparent;
 }
 
+.search-bar input {
+  border: none !important;
+}
+
 .search-bar:hover {
   border: 2px solid black;
 }
 
 .search-bar .search-term {
   width: 230px;
-  border: none;
   outline: none;
 }
 
 .search-bar .inline-search-btn {
-  border: none;
-  border-left: 1px solid grey;
+  border-left: 1px solid grey !important;
   outline: none;
   background: none;
 }

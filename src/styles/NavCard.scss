@@ -8,16 +8,20 @@
   height: 285px;
   margin: 20px;
   &:hover {
-    height: 300px;
+    text-decoration: underline;
+    color: #010046;
     cursor: pointer;
+    .nav-icon-container {
+      border-color: #010046;
+    }
   }
 }
 
-.icon-container {
-  height: 80%;
-  border-radius: 6px;
+.nav-icon-container {
+  flex-shrink: 0;
+  height: 200px;
+  width: 200px;
   border: 2px solid black;
-  overflow: hidden;
 }
 
 .icon {

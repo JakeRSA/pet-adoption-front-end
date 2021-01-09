@@ -35,7 +35,7 @@ function NavCard(props) {
   }
   return (
     <div className="nav-card">
-      <div className="icon-container">
+      <div className="img-container nav-icon-container">
         <img className="icon" src={icon} alt="my pets icon" />
       </div>
       <h1 className="card-text">{text}</h1>

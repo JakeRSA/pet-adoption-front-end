@@ -24,8 +24,12 @@
           align-items: center;
 }
 
-.mini-tools * {
+.mini-tools > * {
   margin-right: 15px;
+}
+
+.mini-search-btn {
+  border: none !important;
 }
 
 .mini-login {
