@@ -24,7 +24,7 @@ function HomePage(props) {
         animals refuse to be vaccinated. Le Compagnon is a a non-profit
         organization.
       </p>
-      <span>
+      <span className="home-buttons">
         <button
           onClick={() => {
             onClickOpenModal("newUser");

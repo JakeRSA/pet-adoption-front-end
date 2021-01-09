@@ -13,7 +13,7 @@
   .animal-bio-fieldset {
     width: 100%;
     .invalid-tooltip {
-      transform: translateY(0%) translateX(0%);
+      transform: translateY(100%) translateX(400px);
     }
   }
   .animal-image-fieldset {
@@ -43,7 +43,7 @@
     height: 250px;
     width: 250px;
   }
-  }
-  .invalid-tooltip {
-    transform: translateY(0%) translateX(130%);
-  }
+}
+.invalid-tooltip {
+  transform: translateX(400px);
+}

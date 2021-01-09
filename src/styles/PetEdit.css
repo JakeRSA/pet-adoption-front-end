@@ -21,8 +21,8 @@
 }
 
 .add-edit-animal-form .animal-bio-fieldset .invalid-tooltip {
-  -webkit-transform: translateY(0%) translateX(0%);
-          transform: translateY(0%) translateX(0%);
+  -webkit-transform: translateY(100%) translateX(400px);
+          transform: translateY(100%) translateX(400px);
 }
 
 .add-edit-animal-form .animal-image-fieldset .invalid-tooltip {
@@ -64,7 +64,7 @@
 }
 
 .invalid-tooltip {
-  -webkit-transform: translateY(0%) translateX(130%);
-          transform: translateY(0%) translateX(130%);
+  -webkit-transform: translateX(400px);
+          transform: translateX(400px);
 }
 /*# sourceMappingURL=PetEdit.css.map */

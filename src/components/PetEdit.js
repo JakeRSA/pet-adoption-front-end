@@ -367,9 +367,6 @@ function PetEdit() {
                     add new animal
                   </button>
                 )}
-                {props.errors && (
-                  <div className="invalid-tooltip">Invalid fields</div>
-                )}
               </span>
             </Form>
           )}

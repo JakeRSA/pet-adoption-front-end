@@ -25,7 +25,10 @@
 }
 
 .edit-profile-form textarea {
-  width: 600px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  max-width: 600px;
   height: 130px;
   resize: none;
 }
@@ -41,9 +44,27 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .do-stuff-btns button {
   margin: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .edit-profile-form .invalid-tooltip {
+    -webkit-transform: translateX(0) translateY(100%);
+            transform: translateX(0) translateY(100%);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .do-stuff-btns {
+    width: 100%;
+  }
+  .do-stuff-btns button {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=ProfilePage.css.map */

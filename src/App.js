@@ -71,6 +71,7 @@ function App() {
         <div className="App">
           <Router>
             <Header
+              className="width-100"
               isSignedIn={!!currentUser}
               onLogInClick={() => {
                 handleOpenModal();

@@ -10,8 +10,10 @@
 }
 
 .banner-image {
-  max-width: 100%;
-  transform: translateY(-25%);
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  // transform: translateY(-25%);
 }
 
 .banner-text {
@@ -23,7 +25,8 @@
 }
 
 .about-text {
-  text-justify: newspaper;
+  text-align: justify;
+  text-justify: inter-word;
   width: 80%;
   padding: 10px;
   border-bottom: 2px solid black;
@@ -46,5 +49,23 @@
     cursor: pointer;
     background-color: black;
     color: white;
+  }
+}
+
+.home-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media screen and (max-width: 650px) {
+  .about-text {
+    font-size: 0.8em;
+    border-bottom: none;
+  }
+  .home-sign-in-button {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1px;
   }
 }

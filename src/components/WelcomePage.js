@@ -14,11 +14,14 @@ function WelcomePage(props) {
     <div>
       <section className="main-section">
         <h1 className="welcome-msg">{`Welcome, ${props.currentUser.firstName} ${props.currentUser.lastName}`}</h1>
-        <div className="search-container">
-          <SearchBar onSubmit={handleSearch} />
-          <Link className="visited" to="/search?advanced">
-            <button className="advanced-btn">advanced search</button>
-          </Link>
+
+        <div className="width-100 flex-justify-center">
+          <div className="search-container">
+            <SearchBar onSubmit={handleSearch} />
+            <Link className="visited" to="/search?advanced">
+              <button className="advanced-btn">advanced search</button>
+            </Link>
+          </div>
         </div>
         <div className="nav-cards">
           {props.currentUser.type === "admin" ? (

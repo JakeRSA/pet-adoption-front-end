@@ -2,20 +2,6 @@ body {
   background-color: #f5f3e9;
 }
 
-.main-section {
-  width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .welcome-msg {
   text-align: center;
   font-size: 2em;
@@ -65,5 +51,14 @@ body {
 
 .card-text:visited {
   text-decoration: none;
+}
+
+@media screen and (max-width: 350px) {
+  .welcome-msg {
+    font-size: 1.6em;
+  }
+  .search-container {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=WelcomePage.css.map */

@@ -14,7 +14,8 @@
   }
 
   textarea {
-    width: 600px;
+    flex-grow: 1;
+    max-width: 600px;
     height: 130px;
     resize: none;
   }
@@ -27,7 +28,25 @@
 .do-stuff-btns {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   button {
     margin: 5px;
   }
+}
+
+@media screen and (max-width: 600px) {
+  .edit-profile-form{
+    .invalid-tooltip {
+      transform: translateX(0) translateY(100%);
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+.do-stuff-btns {
+  width: 100%;
+  button {
+    width: 100%;
+  }
+}
 }

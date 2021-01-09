@@ -33,6 +33,7 @@
 }
 
 .sign-up-form fieldset {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -47,6 +48,10 @@
 
 .sign-up-form #firstName {
   width: 8em;
+}
+
+.sign-up-form #lastName {
+  width: 12em;
 }
 
 .sign-up-form #email {
@@ -132,5 +137,35 @@
   width: fit-content;
   white-space: nowrap;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 475px) {
+  .sign-up-form {
+    width: 100%;
+  }
+  .sign-up-form label {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .sign-up-header {
+    font-size: 1.5em;
+  }
+  fieldset {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .sign-up-form .invalid-tooltip {
+    -webkit-transform: translateY(200%) translateX(-80%) !important;
+            transform: translateY(200%) translateX(-80%) !important;
+  }
+  .sign-up-form .submit-container {
+    margin-top: 20px;
+  }
 }
 /*# sourceMappingURL=SignUpModal.css.map */

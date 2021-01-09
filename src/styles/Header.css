@@ -9,6 +9,7 @@
       -ms-flex-align: center;
           align-items: center;
   background-color: white;
+  width: 100%;
 }
 
 .company-logo {
@@ -41,5 +42,17 @@
 
 .mini-login:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+  .company-logo {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .mini-login {
+    display: none;
+  }
 }
 /*# sourceMappingURL=Header.css.map */

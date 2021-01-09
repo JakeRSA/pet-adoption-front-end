@@ -120,7 +120,7 @@ function SignUpModal(props) {
         ></input>
       </div>
       <h1 className="sign-up-header">
-        {isNewUser ? "JOIN PETCOUTURE.COM" : "SIGN IN TO YOUR ACCOUNT"}
+        {isNewUser ? "JOIN LE COMPAGNON" : "SIGN IN TO YOUR ACCOUNT"}
       </h1>
       <Formik
         initialValues={{

@@ -78,7 +78,7 @@ function ProfilePage(props) {
       />
 
       <section className="main-section">
-        <h1>My Profile</h1>
+        <h1 className="text-align-center">My Profile</h1>
         <Formik
           initialValues={user}
           enableReinitialize={true}
@@ -101,7 +101,9 @@ function ProfilePage(props) {
           validationSchema={validationSchema}
         >
           {loading ? (
-            <Spinner />
+            <div className="width-100 flex-justify-center">
+              <Spinner />
+            </div>
           ) : (
             (props) => (
               <Form className="edit-profile-form">
@@ -189,7 +191,7 @@ function ProfilePage(props) {
                     as="textarea"
                     id="bio"
                     name="bio"
-                    className={canEdit || "no-edit-field"}
+                    className={canEdit || "no-edit-textarea"}
                     disabled={!canEdit}
                   />
                 </fieldset>
