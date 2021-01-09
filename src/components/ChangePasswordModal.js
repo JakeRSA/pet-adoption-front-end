@@ -30,7 +30,7 @@ function ChangePasswordModal(props) {
   return (
     <div>
       <Modal
-        className="sign-up-modal"
+        className="modal"
         isOpen={props.isOpen}
         onRequestClose={props.onCloseModal}
       >
@@ -60,6 +60,8 @@ function ChangePasswordModal(props) {
               )
               .then(() => {
                 setLoadingSubmit(false);
+                props.openSuccessModal();
+                props.onCloseModal();
               })
               .catch((err) => {
                 if (err.response.data.password)

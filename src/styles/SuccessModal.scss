@@ -1,0 +1,11 @@
+.success-modal {
+  background-color: rgb(228, 253, 177);
+  span {
+    display: flex;
+    align-items:center;
+    * {
+      margin: 5px;
+    }
+  }
+
+}

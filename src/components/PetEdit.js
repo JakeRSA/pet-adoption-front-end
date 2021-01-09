@@ -349,13 +349,26 @@ function PetEdit() {
                 {loadingUpdate ? (
                   <Spinner />
                 ) : id ? (
-                  <button className="button-1" type="submit">
+                  <button
+                    className={`button-1 ${
+                      Object.keys(props.errors).length > 0 && "invalid-submit"
+                    }`}
+                    type="submit"
+                  >
                     save changes
                   </button>
                 ) : (
-                  <button className="button-1" type="submit">
+                  <button
+                    className={`button-1 ${
+                      Object.keys(props.errors).length > 0 && "invalid-submit"
+                    }`}
+                    type="submit"
+                  >
                     add new animal
                   </button>
+                )}
+                {props.errors && (
+                  <div className="invalid-tooltip">Invalid fields</div>
                 )}
               </span>
             </Form>

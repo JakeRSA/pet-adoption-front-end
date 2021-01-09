@@ -74,6 +74,20 @@ input, textarea,
   }
 }
 
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 4px;
+}
+
 .img-container {
   border-radius: 6px;
   overflow: hidden;
@@ -108,8 +122,14 @@ input, textarea,
 }
 
 .invalid-img-container {
-  border: 2px solid rgb(158, 5, 5) !important;
+  border: 2px solid rgb(5, 89, 158) !important;
   background-color: rgb(248, 232, 232);
+}
+
+.invalid-submit {
+  border: 2px solid rgb(138, 0, 0) !important;
+  background-color:rgb(255, 206, 206) !important;
+  color: rgb(138, 0, 0);
 }
 
 .visited {

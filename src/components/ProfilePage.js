@@ -10,6 +10,7 @@ import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 import ChangePasswordModal from "./ChangePasswordModal";
 import Spinner from "./Spinner";
+import SuccessModal from "./SuccessModal";
 
 function ProfilePage(props) {
   const authConfig = useContext(AuthContext);
@@ -19,7 +20,8 @@ function ProfilePage(props) {
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [user, setUser] = useState({});
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [successModalIsOpen, setSuccessModalIsOpen] = useState(false);
+  const [successText, setSuccessText] = useState("");
   const PhoneComponent = (props) => <PhoneInput country="AF" {...props} />;
 
   useEffect(() => {
@@ -39,6 +41,14 @@ function ProfilePage(props) {
     setModalIsOpen(false);
   };
 
+  const openSuccessModal = (text) => {
+    setSuccessText(text);
+    setSuccessModalIsOpen(true);
+    setTimeout(() => {
+      setSuccessModalIsOpen(false);
+    }, 2500);
+  };
+
   const validationSchema = Yup.object().shape({
     firstName: Yup.string().required("Please enter your first name"),
     lastName: Yup.string().required("Please enter your last name"),
@@ -55,10 +65,14 @@ function ProfilePage(props) {
 
   return (
     <div>
+      <SuccessModal isOpen={successModalIsOpen} text={successText} />
       <ChangePasswordModal
         isOpen={modalIsOpen}
         onCloseModal={() => {
           handleCloseModal();
+        }}
+        openSuccessModal={() => {
+          openSuccessModal("Successfully changed password");
         }}
         id={user._id}
       />
@@ -75,6 +89,7 @@ function ProfilePage(props) {
               .then(() => {
                 setLoadingSubmit(false);
                 setCanEdit(false);
+                openSuccessModal("Successfully updated profile");
               })
               .catch((err) => {
                 if (err.response.data.email) {

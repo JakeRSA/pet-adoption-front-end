@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,gBAAgB,EAAE,OAAkB;CASrC;;AAVD,AAEE,cAFY,CAEZ,IAAI,CAAC;EACH,OAAO,EAAE,IAAI;EACb,WAAW,EAAC,MAAM;CAInB;;AARH,AAKI,cALU,CAEZ,IAAI,CAGF,CAAC,CAAC;EACA,MAAM,EAAE,GAAG;CACZ",
+    "sources": [
+        "SuccessModal.scss"
+    ],
+    "names": [],
+    "file": "SuccessModal.css"
+}

@@ -103,7 +103,7 @@ function SignUpModal(props) {
 
   return (
     <Modal
-      className="sign-up-modal"
+      className="modal"
       isOpen={props.isOpen}
       onRequestClose={() => {
         props.onCloseModal();

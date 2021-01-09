@@ -88,6 +88,28 @@ input, textarea,
   background-color: #111010;
 }
 
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4px;
+}
+
 .img-container {
   border-radius: 6px;
   overflow: hidden;
@@ -128,8 +150,14 @@ input, textarea,
 }
 
 .invalid-img-container {
-  border: 2px solid #9e0505 !important;
+  border: 2px solid #05599e !important;
   background-color: #f8e8e8;
+}
+
+.invalid-submit {
+  border: 2px solid #8a0000 !important;
+  background-color: #ffcece !important;
+  color: #8a0000;
 }
 
 .visited {
