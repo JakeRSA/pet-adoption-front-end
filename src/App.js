@@ -21,7 +21,7 @@ import ViewUser from "./components/ViewUser";
 Modal.setAppElement("#root");
 
 function App() {
-  const baseServerUrl = "http://localhost:5000";
+  const baseServerUrl = "https://le-compagnon-server.herokuapp.com";
 
   const [isNewUser, setIsNewUser] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
